@@ -16,39 +16,3 @@ export const services = [
   },
 ];
 
-export const daysOfWeekWorkTime = [
-  {
-    name: "monday",
-    workHours: [
-      { start: { h: 8, m: 30 }, end: { h: 14, m: 30 } },
-      { start: { h: 18, m: 30 }, end: { h: 21, m: 30 } },
-    ],
-  },
-  {
-    name: "tuesday",
-    workHours: [{ start: { h: 8, m: 0 }, end: { h: 19, m: 30 } }],
-  },
-  {
-    name: "wednesday",
-    workHours: [{ start: { h: 0, m: 1 }, end: { h: 23, m: 59 } }],
-  },
-  {
-    name: "thursday",
-    workHours: [{ start: { h: 8, m: 0 }, end: { h: 19, m: 30 } }],
-  },
-  {
-    name: "friday",
-    workHours: [{ start: { h: 8, m: 0 }, end: { h: 19, m: 30 } }],
-  },
-  {
-    name: "saturday",
-    workHours: [
-      { start: { h: 7, m: 0 }, end: { h: 11, m: 30 } },
-      { start: { h: 16, m: 0 }, end: { h: 21, m: 30 } },
-    ],
-  },
-  {
-    name: "sunday",
-    workHours: [],
-  },
-];

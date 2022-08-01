@@ -1,4 +1,4 @@
-.registration-form {
+form.place-form {
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -12,10 +12,23 @@
     font-size: 0.9rem;
     font-weight: 300;
   }
+  input[type="checkbox"] {
+    width: 25px !important;
+    height: 25px;
+  }
+
+  label {
+    color: var(--lightGray);
+    font-size: 0.8rem;
+    font-weight: 300;
+  }
   div {
-    text-align: center;
+    display: flex;
+    column-gap: 15px;
+    align-items: center;
+    justify-content: space-between;
     span {
-      font-weight: 500;
+      font-weight: 300;
       color: var(--lightGray);
     }
   }

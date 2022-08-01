@@ -1,41 +1,34 @@
-const express = require('express')
-const cors = require('cors')
-const jwt = require('jsonwebtoken');
-const path = require('path')
-
-const app = express()
-
+const express = require("express");
+const cors = require("cors");
+const jwt = require("jsonwebtoken");
+const path = require("path");
+const mongoose = require("mongoose");
+const app = express();
+const config = require("./config");
+const { mongoDbUrl, secret, serverPort } = config.module;
 
 //middleware
-app.use(cors())
-app.use(express.json())
-const verifyJWT =(req,res,next)=>{
+app.use(cors());
+app.use(express.json());
 
-    const token = req.headers['x-access-token']
- 
-    if(!token){
-     res.json({auth:'no token'})
-    }else{
-     jwt.verify(token,'thisIsSecret',(err,decoded)=>{
-         if(err){
-             res.json({auth:'failed'})
-         }else{
-             console.log(token);
-            req.userId = decoded.id
-            next()
-         }
-     })
-    }
- 
- }
+app.listen(serverPort);
 
- 
+console.log("server start on port " + serverPort);
 
-app.listen(5000)
+mongoose.connect(mongoDbUrl);
 
-console.log('server start');
+//routes
+const router = express.Router();
+const userRoute = require("./routes/userRoute");
+const placesRoute = require("./routes/placesRoute");
+const timeFramesRoute = require("./routes/timeFramesRoute");
+const servicesRoute = require("./routes/servicesRoute");
 
+app.get("/", (req, res) => {
+  res.send("server is listening in port 5000");
+});
 
-app.get('/',(req,res)=>{
-    res.send('server is listening in port 5000')
-})
+app.use("/", cors(), userRoute);
+app.use("/", cors(), placesRoute);
+app.use("/", cors(), timeFramesRoute);
+app.use("/", cors(), servicesRoute);

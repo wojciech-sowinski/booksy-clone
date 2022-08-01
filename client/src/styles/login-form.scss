@@ -1,18 +1,22 @@
-.login-form{
-    margin:auto;
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    padding: 30px;
-    max-width: 400px;
-    input{
-        padding: 10px;
-        border:1px solid rgb(0, 143, 95);
+.login-form {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+  padding: 30px;
+  max-width: 600px;
+  input {
+    padding: 10px;
+    border: none;
+    background-color: var(--lightGray);
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+  div {
+    text-align: center;
+    span {
+      font-weight: 500;
+      color: var(--lightGray);
     }
-    div{
-        text-align: center;
-        span{
-            font-weight: 500;
-        }
-    }
+  }
 }

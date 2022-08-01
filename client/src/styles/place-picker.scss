@@ -1,0 +1,30 @@
+.place-picker {
+  margin: 10px;
+  padding: 40px 20px;
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  font-size: 1.2rem;
+  span.title {
+    color: var(--lightGray);
+    font-size: 1.5rem;
+    font-weight: 100;
+  }
+  select {
+    flex-grow: 1;
+    font-size: 1.1rem;
+    padding: 5px 20px;
+    border-radius: 40px 0 0 40px;
+    height: 70px;
+    border: none;
+    background-color: var(--lightGray);
+    overflow: hidden;
+  }
+  button {
+    border-radius: 0 40px 40px 0;
+  }
+  > div {
+    display: flex;
+  }
+}

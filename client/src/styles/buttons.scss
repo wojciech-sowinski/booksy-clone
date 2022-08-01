@@ -1,7 +1,48 @@
-input[type=submit].submit-button{
-    background-color: rgb(0, 143, 95);
-    color:#fff;
-    border:none;
-    padding: 15px;
-    cursor: pointer;
+button {
+  border: none;
+  padding: 10px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: var(--green);
+  color: #fff;
+  &.red {
+    background-color: rgb(190, 72, 64);
+  }
+  &.orange {
+    background-color: rgb(192, 149, 55);
+  }
+}
+
+input[type="submit"].submit-button {
+  background-color: var(--green);
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  cursor: pointer;
+}
+
+.time-frame-add-button {
+  width: 5%;
+  font-size: 30px;
+  background-color: var(--green);
+  border: none;
+  color: #fff;
+  transition: 0.3s;
+  cursor: pointer;
+  span {
+    display: block;
+
+    transition: 0.4s;
+  }
+  &:hover {
+    span {
+      transform: scale(1.4) rotate(180deg);
+    }
+  }
+}
+.add-place-button {
+  color: var(--purpledark);
+  background-color: var(--pink);
+  transition: 0.3s;
+  cursor: pointer;
 }

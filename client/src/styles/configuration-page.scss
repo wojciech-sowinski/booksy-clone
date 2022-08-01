@@ -1,0 +1,41 @@
+.configuration-page {
+  background: linear-gradient(rgb(32, 32, 32), var(--base));
+
+  nav.configuration-nav {
+    display: flex;
+    z-index: 0;
+    justify-content: center;
+
+    a {
+      position: relative;
+      text-decoration: none;
+      background-color: none;
+      background-color: var(--green);
+      color: var(--lightGray);
+
+      padding: 15px 40px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: 0.3s;
+
+      &.active {
+        color: var(--pink);
+        background-color: var(--greenDark);
+
+        transition: 0.3s;
+      }
+    }
+  }
+  > main {
+    padding: 10px;
+
+    min-height: 90vh;
+  }
+
+  .configuration-pages-wrapper {
+    margin: 0 10px;
+    padding: 10px;
+    // background-color: var(--greenDark);
+  }
+}

@@ -1,3 +1,4 @@
+import '../styles/home-page.scss'
 const HomePage = () => {
     return ( 
         <div className="home-page">

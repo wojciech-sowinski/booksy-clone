@@ -1,63 +1,111 @@
-import { daysOfWeekWorkTime } from "../data";
 import "../styles/week-diagram.scss";
+import "../styles/buttons.scss";
+import TimeFrameForm from "./TimeFrameForm";
+import { useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fecthTimeFrames, deleteTimeFrame } from "../actions/userActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
-const WeekDiagram = () => {
-  const daysToRender = (daysToRender) => {
-    const hoursRender = (workHours) => {
-      const hours = [];
+const WeekDiagram = ({ activePlace }) => {
+  const [timeFrameData, setTimeFrameData] = useState({
+    show: false,
+    dayIndex: "",
+    dayName: "",
+    activePlace: "",
+  });
+  const { show, dayIndex, dayName } = timeFrameData;
+  const { timeFrames,loading } = useSelector(
+    (state) => state.timeFramesReducer
+  );
+  const dispatch = useDispatch();
 
-      const formatTimeComponent = (number) => {
-        return number.toLocaleString("en-US", {
-          minimumIntegerDigits: 2,
-          useGrouping: false,
-        });
-      };
+  const daysOfWeek = [
+    "poniedziałek",
+    "wtorek",
+    "środa",
+    "czwartek",
+    "piątek",
+    "sobota",
+    "niedziela",
+  ];
 
-      workHours.map((frame, index) => {
-        const startPosition =
-          (100 / 1440) * (frame.start.h * 60 + frame.start.m);
-        const endPosition =
-          100 - (100 / 1440) * (frame.end.h * 60 + frame.end.m);
-        hours.push(
-          <div
-            className="time-frame"
-            style={{ left: `${startPosition}%`, right: `${endPosition}%` }}
-          >
-            <span>
-              {formatTimeComponent(frame.start.h) +
-                ":" +
-                formatTimeComponent(frame.start.m)}
-            </span>
-            <span>
-              {formatTimeComponent(frame.end.h) +
-                ":" +
-                formatTimeComponent(frame.end.m)}
-            </span>
-          </div>
-        );
+  const addTimeFrame = (show = false, dayIndex = "", dayName = "") => {
+    setTimeFrameData({ show, dayIndex, dayName, activePlace });
+  };
+
+  const hoursRender = (index) => {
+    const hours = [];
+
+    const formatTimeComponent = (number) => {
+      return number.toLocaleString("en-US", {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
       });
-
-      for (let i = 0; i < 24; i++) {
-        hours.push(
-          <div className="hour">
-            <span>{i}</span>
-          </div>
-        );
-      }
-
-      return hours;
     };
 
+    const workHours = timeFrames.filter(
+      (timeFrame) =>
+        timeFrame.placeId === activePlace && timeFrame.dayIndex === index
+    );
+
+    workHours.forEach((frame, index) => {
+      const startPosition = (100 / 1440) * frame.start;
+      const endPosition = 100 - (100 / 1440) * frame.end;
+      hours.push(
+        <div
+          key={frame._id}
+          className="time-frame"
+          onClick={() => {
+            dispatch(deleteTimeFrame(frame._id));
+          }}
+          style={{ left: `${startPosition}%`, right: `${endPosition}%` }}
+        >
+          <span className="time-frame-span-info">
+            {formatTimeComponent(parseInt(frame.start / 60)) +
+              ":" +
+              formatTimeComponent(
+                parseInt(frame.start - parseInt(frame.start / 60) * 60)
+              )}
+          </span>
+          <span className="time-frame-span-info">
+            {formatTimeComponent(parseInt(frame.end / 60)) +
+              ":" +
+              formatTimeComponent(
+                parseInt(frame.end - parseInt(frame.end / 60) * 60)
+              )}
+          </span>
+        </div>
+      );
+    });
+
+    for (let i = 0; i < 24; i++) {
+      hours.push(
+        <div key={activePlace + "hour" + i + index} className="hour">
+          <span>{i}</span>
+        </div>
+      );
+    }
+
+    return hours;
+  };
+  const daysToRender = (daysToRender) => {
     const days = [...daysToRender];
 
-    return days.map((day) => {
+    return days.map((day, index) => {
       return (
-        <div className={`day ${day.name}`}>
+        <div key={activePlace + index} className={`day`}>
           <div className="day-label">
-            <span>{day.name}</span>
+            <span>{day}</span>
           </div>
-          <div className="day-hours">{hoursRender(day.workHours)}</div>
-          <button className="time-frame-add-button">
+          <div className="day-hours">{hoursRender(index)}</div>
+          <button
+            className="time-frame-add-button"
+            onClick={() => {
+              addTimeFrame(true, index, daysOfWeek[index]);
+            }}
+          >
             <span>+</span>
           </button>
         </div>
@@ -65,7 +113,31 @@ const WeekDiagram = () => {
     });
   };
 
-  return <div className="week-diagram">{daysToRender(daysOfWeekWorkTime)}</div>;
+  useEffect(() => {
+    dispatch(fecthTimeFrames());
+    console.log(loading);
+  }, [activePlace]);
+
+  return (
+    <>
+      <div className="week-diagram">
+        {}
+        <span>
+          <FontAwesomeIcon icon={faExclamationTriangle} /> Kliknij aby usunąć
+          wybrane ramy czasowe.
+        </span>
+        {daysToRender(daysOfWeek)}
+        {show && (
+          <TimeFrameForm
+            dayIndex={dayIndex}
+            dayName={dayName}
+            closeForm={addTimeFrame}
+            placeId={activePlace}
+          />
+        )}
+      </div>
+    </>
+  );
 };
 
 export default WeekDiagram;

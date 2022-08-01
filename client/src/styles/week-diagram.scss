@@ -1,13 +1,21 @@
 .week-diagram {
+  position: relative;
   display: flex;
   flex-direction: column;
   row-gap: 1px;
+  > span {
+    color: var(--lightGray);
+    padding: 30px;
+    svg {
+      color: rgb(192, 149, 55);
+    }
+  }
   .day {
     display: flex;
     column-gap: 1px;
     .day-label {
-      background-color: deepskyblue;
-      color: #fff;
+      background-color: var(--green);
+      color: var(--lightGray);
       text-transform: uppercase;
       width: 10%;
       padding: 5px;
@@ -15,6 +23,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      padding: 5px;
+      font-size: 0.8rem;
     }
     .day-hours {
       position: relative;
@@ -24,9 +34,9 @@
       align-items: flex-end;
       .hour {
         flex-grow: 1;
-        background-color: rgb(211, 211, 211);
+        background-color: var(--lightGray);
         width: calc(100% / 25);
-        aspect-ratio: 1/1;
+        height: 100%;
         padding: 5px;
         font-size: 10px;
       }
@@ -35,15 +45,20 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: rgb(0, 187, 125);
-        mix-blend-mode: color-burn;
+        background-color: var(--greenDark);
+        // mix-blend-mode: color-burn;
+        opacity: 0.8;
 
         padding: 5px;
-        height: 60%;
+        height: 100%;
         transition: 0.3s;
-        span {
-          color: rgb(255, 255, 255);
+        span.time-frame-span-info {
+          writing-mode: vertical-rl;
+          text-orientation: mixed;
+          font-size: 15px;
+          color: var(--lightGray);
           font-weight: 500;
+          letter-spacing: 2px;
         }
 
         &:hover {
@@ -51,25 +66,6 @@
           mix-blend-mode: color-burn;
           transition: 0.3s;
           cursor: pointer;
-        }
-      }
-    }
-    .time-frame-add-button {
-      width: 5%;
-      font-size: 30px;
-      background-color: rgb(0, 187, 125);
-      border: none;
-      color: #fff;
-      transition: 0.3s;
-      cursor: pointer;
-      span {
-        display: block;
-
-        transition: 0.4s;
-      }
-      &:hover {
-        span {
-          transform: scale(1.4) rotate(180deg);
         }
       }
     }

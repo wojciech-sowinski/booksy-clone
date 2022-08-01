@@ -1,18 +1,52 @@
-*{
-    box-sizing: border-box;
-    margin:0;
-    padding:0;
+@import url("https://fonts.googleapis.com/css2?family=Advent+Pro:wght@200;400;700&family=Montserrat:wght@200;300;400;600&family=Signika+Negative:wght@300;400;700&display=swap");
+
+// font-family: 'Advent Pro', sans-serif;
+// font-family: 'Montserrat', sans-serif;
+// font-family: 'Signika Negative', sans-serif;
+
+// base #2f4455
+// purpledark #2e151B
+// pink #DA7B93
+// green #376E6F
+// greendark #1C3334
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Signika Negative", sans-serif;
+  font-weight: 300;
+  --base: rgb(46, 68, 85);
+  --purpleDark: #2e151b;
+  --pink: #da7b93;
+  --green: #376e6f;
+  --greenDark: #1c3334;
+  --lightGray: rgb(212, 212, 212);
 }
 
-:root{    
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-size:18px;
+:root {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 24px;
 }
 
-.App{
+.App {
+  position: relative;
+  .test-nav {
+    display: flex;
+    justify-content: flex-end;
+    list-style: none;
+    column-gap: 30px;
 
+    height: 60px;
+    font-size: 1.2rem;
+    align-items: center;
+    background-color: rgb(32, 32, 32);
+    a {
+      text-decoration: none;
+      padding: 35px 35px;
+      text-transform: uppercase;
+      color: var(--green);
+    }
+  }
 }
