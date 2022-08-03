@@ -3,21 +3,30 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addService } from "../actions/userActions";
+import { addService, updateService, deleteService } from "../actions/userActions";
+import { useEffect } from "react";
 
-const ServiceForm = ({ activeService, activePlace }) => {
+const ServiceForm = ({ activeService, activePlace, closeForm }) => {
   const [formData, setFormData] = useState({});
   const dispatch = useDispatch();
-  const { response, loading, userData } = useSelector(
-    (state) => state.userDataReducer
+  const { response, loading, services } = useSelector(
+    (state) => state.servicesReducer
   );
   const [addServiceInfo, setAddServiceInfo] = useState(response);
 
   const submitHandle = (e) => {
     e.preventDefault();
-console.log({ ...formData, placeId: activePlace });
-    addService(activePlace, { ...formData, placeId: activePlace }, dispatch);
+    if (activeService) {
+
+      updateService({ ...formData }, dispatch)
+    } else {
+
+      addService(activePlace, { ...formData, placeId: activePlace }, dispatch)
+    }
+
+    closeForm()
   };
+
 
   const clearFormHandle = () => {
     setFormData({});
@@ -35,9 +44,21 @@ console.log({ ...formData, placeId: activePlace });
     setFormData({ ...formData, [propertyName]: propertyValue });
   };
 
-  return (
+  useEffect(() => {
+
+    if (activeService) {
+      const activeServiceData = services.filter(service => service._id === activeService)
+
+      setFormData(...activeServiceData)
+    }
+
+  }, [activeService, activePlace])
+
+  return (<>
+    <div onClick={closeForm} className="overlay"></div>
     <form onSubmit={submitHandle} className="service-form">
-      {console.log(activePlace, "active place")}
+
+
       <input
         type="text"
         placeholder="Nazwa Usługi"
@@ -104,7 +125,7 @@ console.log({ ...formData, placeId: activePlace });
           id="service-suspend-checkbox"
           name="suspend"
           onChange={formFieldChangeHandle}
-          value={formData.suspend || ""}
+          checked={formData.suspend || ""}
         />
         <label style={{ width: "90%" }} htmlFor="service-suspend-checkbox">
           Zawieszone wykonywanie usługi (dokonanie rezerwacji nie będzie
@@ -117,12 +138,15 @@ console.log({ ...formData, placeId: activePlace });
           Wyczyść
         </button>
         {activeService && (
-          <button onClick={() => {}} className="red">
+          <button onClick={() => { dispatch(deleteService(activeService)) }} className="red">
             Usuń
           </button>
         )}
       </div>
     </form>
+
+  </>
+
   );
 };
 

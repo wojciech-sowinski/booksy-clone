@@ -19,11 +19,17 @@ input[type="submit"].submit-button {
   border: none;
   padding: 10px 30px;
   cursor: pointer;
+  &:disabled {
+    color: red;
+    opacity: 0.7;
+    background-color: var(--lightGray);
+    color: rgb(128, 128, 128);
+  }
 }
 
 .time-frame-add-button {
   width: 5%;
-  font-size: 30px;
+  font-size: 1.3rem;
   background-color: var(--green);
   border: none;
   color: #fff;

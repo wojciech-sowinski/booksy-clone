@@ -16,7 +16,7 @@ const WeekDiagram = ({ activePlace }) => {
     activePlace: "",
   });
   const { show, dayIndex, dayName } = timeFrameData;
-  const { timeFrames,loading } = useSelector(
+  const { timeFrames, loading } = useSelector(
     (state) => state.timeFramesReducer
   );
   const dispatch = useDispatch();
@@ -115,13 +115,13 @@ const WeekDiagram = ({ activePlace }) => {
 
   useEffect(() => {
     dispatch(fecthTimeFrames());
-    console.log(loading);
+
   }, [activePlace]);
 
   return (
     <>
       <div className="week-diagram">
-        {}
+        { }
         <span>
           <FontAwesomeIcon icon={faExclamationTriangle} /> Kliknij aby usunąć
           wybrane ramy czasowe.

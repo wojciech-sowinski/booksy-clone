@@ -222,7 +222,7 @@ export const deleteTimeFrame = (id) => async (dispatch) => {
 };
 
 export const addService = (activePlace, formData, dispatch) => {
-  console.log('action addserv');
+  
   return axios
     .post(
       config.serverUrl + "services",
@@ -234,6 +234,57 @@ export const addService = (activePlace, formData, dispatch) => {
       }
     )
     .then((resolve) => {
-      console.log(resolve, "resolve from cetch");
+      fetchServices(dispatch)
+    });
+};
+
+export const updateService = (formData, dispatch) => {
+ 
+  return axios
+    .put(
+      config.serverUrl + "services",
+      { ...formData },
+      {
+        headers: {
+          "x-access-token": localStorage.getItem(config.authTokenName),
+        },
+      }
+    )
+    .then((resolve) => {
+      fetchServices(dispatch)
+      return resolve.data
+      
+    });
+};
+
+export const fetchServices  = (dispatch)=>{
+dispatch({type:"fetchServices",payload:{loading:true}})
+
+  return axios
+    .get(
+      config.serverUrl + "services",
+            {
+        headers: {
+          "x-access-token": localStorage.getItem(config.authTokenName),
+        },
+      }
+    )
+    .then((resolve) => {
+     
+      dispatch({type:"fetchServices",payload:{loading:false,services:resolve.data.services}})
+      
+    });
+};
+
+export const deleteService = (id) => async (dispatch) => {
+  await axios
+    .delete(config.serverUrl + "services", {
+      headers: { "x-access-token": localStorage.getItem(config.authTokenName) },
+      data: {
+        serviceId: id,
+      },
+    })
+    .then((resolve) => {
+      fetchServices(dispatch)
     });
 };

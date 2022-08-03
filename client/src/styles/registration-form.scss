@@ -19,4 +19,13 @@
       color: var(--lightGray);
     }
   }
+  .password-strenght-bar {
+    span,
+    p {
+      text-align: center !important;
+      font-weight: 500;
+      font-size: 0.7rem !important;
+      color: var(--lightGray) !important;
+    }
+  }
 }

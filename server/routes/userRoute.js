@@ -13,6 +13,10 @@ router.post("/register", (req, res) => {
   const { email, password } = req.body;
   console.log(req.body);
 
+  if(password.length<5){
+    res.status(200).json({ success: false, response: "password to short" });
+  }
+
   User.findOne({ email }, (err, data) => {
     if (err) {
       res.status(200).json({ success: false, response: "search user error" });

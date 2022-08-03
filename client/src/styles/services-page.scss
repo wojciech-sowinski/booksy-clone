@@ -1,0 +1,50 @@
+.services-page {
+  ul {
+    list-style: none;
+    li {
+      padding: 20px 0px 30px 30px;
+      margin: 10px auto;
+      border: 2px solid var(--green);
+      max-width: 800px;
+      justify-content: space-between;
+      display: flex;
+      > div {
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+      }
+      .service-title {
+        font-size: 1.4rem;
+        font-weight: 100;
+        color: var(--lightGray);
+      }
+      .service-properties {
+        display: flex;
+        column-gap: 20px;
+        background-color: var(--lightGray);
+        padding: 5px 20px;
+        margin-left: -32px;
+      }
+      .service-description {
+        padding: 10px;
+        color: var(--lightGray);
+      }
+      &.suspend {
+        background-color: rgb(156, 58, 58);
+        .service-suspend-info {
+          color: var(--lightGray);
+          font-size: 1.1rem;
+        }
+      }
+      .service-buttons {
+        button {
+          padding: 15px;
+
+          text-align: center;
+          aspect-ratio: 1/1;
+          background-color: rgba(0, 0, 0, 0);
+        }
+      }
+    }
+  }
+}

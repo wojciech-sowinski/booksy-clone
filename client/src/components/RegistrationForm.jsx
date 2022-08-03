@@ -3,12 +3,14 @@ import "../styles/buttons.scss";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerNewUser } from "../actions/userActions";
+import PasswordStrengthBar from 'react-password-strength-bar';
 
 const RegistrationForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [registrationInfo, setRegistrationInfo] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState(0)
 
   const dispatch = useDispatch();
   const { response, loading } = useSelector((state) => state.userDataReducer);
@@ -23,10 +25,16 @@ const RegistrationForm = () => {
       }, 3000);
     } else {
       registerNewUser({ email, password }, dispatch).then((resolve) => {
-        console.log('rewsolve',resolve);
+        console.log('rewsolve', resolve);
         if (resolve === "user exists") {
           setRegistrationInfo("Użytkownik o podanym EMAIL już istnieje.");
-        } else if (resolve === "user created") {
+        } else if (resolve === "password to short") {
+          setRegistrationInfo("Hasło jest zbyt krótkie");
+          setTimeout(() => {
+            setRegistrationInfo("");
+          }, 3000);
+        }
+        else if (resolve === "user created") {
           setRegistrationInfo(
             "Profil użytkownika został utworzony. Zaloguj się."
           );
@@ -45,7 +53,7 @@ const RegistrationForm = () => {
     }
   };
 
-  useEffect(() => {}, [response]);
+  useEffect(() => { }, [response]);
 
   return (
     <form onSubmit={submitHandle} className="registration-form">
@@ -66,14 +74,21 @@ const RegistrationForm = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <input
+      <PasswordStrengthBar
+        password={password}
+        minLength={5}
+        className='password-strenght-bar'
+        scoreWords={['hasło jest zbyt słabe', 'hasło jest zbyt słabe', 'średnie hasło', 'OK', 'Silne hasło']}
+        shortScoreWord={'Hasło musi mieć min. 5 znaków'}
+        onChangeScore={(score, feedback) => { setPasswordStrength(score) }} />
+      < input
         type="password"
         name="registration-password-confirm"
         placeholder="Potwierdź Hasło"
         value={passwordConfirm}
         onChange={(e) => setPasswordConfirm(e.target.value)}
       />
-      <input className="submit-button" type="submit" value="Utwórz Profil" />
+      <input className="submit-button" disabled={passwordStrength < 2} type="submit" value="Utwórz Profil" />
       {registrationInfo && (
         <div>
           <span className="registration-info">{registrationInfo}</span>

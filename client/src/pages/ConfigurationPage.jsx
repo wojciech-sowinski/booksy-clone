@@ -7,7 +7,7 @@ import ServicesPage from "./ServicesPage";
 import { useState } from "react";
 import PlacePicker from "../components/PlacePicker";
 import { useEffect } from "react";
-import { fetchPlaces } from "../actions/userActions";
+import { fetchPlaces, fetchServices } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/configuration-page.scss";
 import PlaceForm from "../components/PlaceForm";
@@ -28,11 +28,11 @@ const ConfigurationPage = () => {
 
   const dispatch = useDispatch();
 
-  const addNewPlaceHandle = () => {};
 
   useEffect(() => {
-    console.log("fetch places");
+
     dispatch(fetchPlaces());
+    fetchServices(dispatch)
   }, [activePlace, auth, userData]);
 
   return (
@@ -92,7 +92,7 @@ const ConfigurationPage = () => {
                   path="/servicescatalog"
                   element={<ServicesPage activePlace={activePlace} />}
                 />
-                {console.log(activePlace, "active place from congipage")}
+
               </Routes>
             </div>
           </>
