@@ -1,0 +1,23 @@
+.fc {
+  color: var(--lightGray);
+  table {
+    border: none !important;
+  }
+  .fc-col-header-cell {
+    background-color: var(--green);
+    border: none !important;
+  }
+  .fc-day-today {
+    background-color: var(--green) !important;
+  }
+  .fc-daygrid-event {
+    white-space: pre-line;
+    font-size: 0.7rem;
+    background-color: var(--lightGray);
+    border: none;
+    padding: 3px;
+    .fc-event-main {
+      color: var(--greenDark) !important;
+    }
+  }
+}
