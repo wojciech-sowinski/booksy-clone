@@ -6,11 +6,18 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { fetchPlaces } from "../actions/userActions";
+import Select from 'react-dropdown-select';
 
 const PlacePicker = ({ setActivePlace, setAddNewPlace }) => {
   const { loading, places } = useSelector((state) => state.placesReducer);
   const [selectedPlace, setSelectedPlace] = useState("");
   const dispatch = useDispatch();
+
+  const options = places.map(place => {
+    return {
+      ...place, label: `${place.name} | ${place.street} ${place.houseNumber} | ${place.city}`, value: place._id
+    }
+  })
 
   const addPlaceHandle = () => {
     setSelectedPlace("");
@@ -41,16 +48,23 @@ const PlacePicker = ({ setActivePlace, setAddNewPlace }) => {
   return (
     <div className="place-picker">
       <span className="title">Twoje miejsca:</span>
-      <div>
-        <select name="places" value={selectedPlace} onChange={onChangeHandle}>
-          <option value="">---</option>
-          {placesRender()}
-        </select>
-        <button className="add-place-button" onClick={addPlaceHandle}>
+
+      <div><Select
+        separator
+        placeholder='wybierz miejsce...'
+        clearable
+        options={options}
+
+        onChange={(values) => setActivePlace(values[0]?._id)}
+        onClearAll={(values) => setActivePlace('')}
+        itemRenderer={({ item, methods }) => (<div onClick={() => methods.addItem(item)} className="option-div">
+          <span className="place-title">{item.name}</span>
+          <span className="place-info">{item.street} {item.houseNumber} | {item.city}</span>
+        </div>)}
+      /><button className="add-place-button" onClick={addPlaceHandle}>
           <FontAwesomeIcon icon={faPlus} />
           <span> Dodaj</span>
-        </button>
-      </div>
+        </button></div>
     </div>
   );
 };

@@ -1,7 +1,14 @@
 .fc {
   color: var(--lightGray);
+  * {
+    z-index: 0 !important;
+  }
   table {
     border: none !important;
+    td {
+      border: 1px solid var(--green);
+      cursor: pointer;
+    }
   }
   .fc-col-header-cell {
     background-color: var(--green);
