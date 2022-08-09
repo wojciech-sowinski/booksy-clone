@@ -1,9 +1,7 @@
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-  userId: { 
-    type: String,
-    required: true, },
+  
   placeId:{
     type:String,
     required: true,},
@@ -14,6 +12,8 @@ serviceDate:{type:Date,
     required: true,},
 serviceStart:{type:Number,
     required: true,},
+serviceEnd:{type:Number,
+    required: true,},
   clientFirstName:{
     type:String,
     required: true,}, 
@@ -23,6 +23,9 @@ serviceStart:{type:Number,
   email: { 
     type: String ,
     required: true,},  
+  dayOfWeek:{      
+      type:Number,
+      required:true},
   created: {
     type: Date,
     default: Date.now,

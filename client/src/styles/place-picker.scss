@@ -7,7 +7,7 @@
   row-gap: 40px;
   font-size: 1.2rem;
   span.title {
-    color: var(--lightGray);
+    color: var(--green);
     font-size: 1.5rem;
     font-weight: 100;
   }
@@ -17,11 +17,11 @@
     border-radius: 40px 0 0 40px;
     flex-basis: 80% !important;
     min-width: 800px !important;
-    border: none;
+    // border: none;
     height: 70px;
     background-color: var(--lightGray);
     flex-grow: 1;
-    // overflow: hidden;
+    border: 1px solid var(--green); // overflow: hidden;
     .option-div {
       display: flex;
       flex-direction: column;

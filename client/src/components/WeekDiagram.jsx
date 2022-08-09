@@ -4,7 +4,7 @@ import TimeFrameForm from "./TimeFrameForm";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fecthTimeFrames, deleteTimeFrame } from "../actions/userActions";
+import { fetchTimeFrames, deleteTimeFrame } from "../actions/userActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
@@ -22,13 +22,13 @@ const WeekDiagram = ({ activePlace }) => {
   const dispatch = useDispatch();
 
   const daysOfWeek = [
+    "niedziela",
     "poniedziałek",
     "wtorek",
     "środa",
     "czwartek",
     "piątek",
     "sobota",
-    "niedziela",
   ];
 
   const addTimeFrame = (show = false, dayIndex = "", dayName = "") => {
@@ -114,7 +114,7 @@ const WeekDiagram = ({ activePlace }) => {
   };
 
   useEffect(() => {
-    dispatch(fecthTimeFrames());
+    dispatch(fetchTimeFrames());
 
   }, [activePlace]);
 

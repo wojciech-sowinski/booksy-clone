@@ -16,12 +16,13 @@
   padding: 0;
   font-family: "Signika Negative", sans-serif;
   font-weight: 300;
-  --base: rgb(46, 68, 85);
+  --base: rgb(255, 255, 255);
   --purpleDark: #2e151b;
-  --pink: #da7b93;
-  --green: #376e6f;
-  --greenDark: #1c3334;
-  --lightGray: rgb(212, 212, 212);
+  --pink: #e79c6a;
+  --green: #4b81d3;
+  --greenDark: #0a2e64;
+  --lightGray: rgb(255, 255, 255);
+  --grayBlue: rgb(162, 164, 187);
 }
 
 :root {
@@ -41,7 +42,7 @@
     height: 60px;
     font-size: 1.2rem;
     align-items: center;
-    background-color: rgb(32, 32, 32);
+    background-color: rgb(255, 255, 255);
     a {
       text-decoration: none;
       padding: 35px 35px;

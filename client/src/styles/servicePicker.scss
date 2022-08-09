@@ -1,10 +1,17 @@
-form {
+.reservation-form {
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
-  > span {
+  > * {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    // justify-content: center;
+  }
+
+  > div > span,
+  .term-info {
     font-size: 1.5rem;
-    color: var(--lightGray);
+    color: var(--green);
     .number {
       display: inline-block;
       margin: 10px;
@@ -48,38 +55,78 @@ form {
   //   }
 }
 
-.react-dropdown-select {
-  font-size: 1.1rem;
-  padding: 5px 20px;
-  border-radius: 40px 0 0 40px;
-  flex-basis: 80% !important;
-  min-width: 800px !important;
-  border: none;
-  height: 70px;
-  background-color: var(--lightGray);
-  flex-grow: 1;
-  // overflow: hidden;
-  .option-div {
+.reservation-form {
+  .guest-data {
+    margin: auto;
     display: flex;
     flex-direction: column;
-    padding: 5px 15px;
+    max-width: 600px;
+    row-gap: 20px;
+    input {
+      border: 1px solid var(--green);
+    }
+    > div {
+      display: flex;
+      justify-content: center;
+      > * {
+        flex-grow: 1;
+      }
+    }
+    label {
+      color: var(--green);
+    }
+  }
+  .react-dropdown-select {
+    font-size: 1.1rem;
+    padding: 5px 20px;
+    border-radius: 40px !important;
+    flex-basis: 80% !important;
+    min-width: 800px !important;
+    border: 1px solid var(--green);
+    height: 70px;
     background-color: var(--lightGray);
-    &:hover {
-      background-color: var(--green);
-    }
-    .place-title {
-      font-size: 1.2rem;
-      font-weight: 400;
-    }
-    .place-info {
-      font-size: 1rem;
-      font-weight: 300;
+    flex-grow: 1;
+    // overflow: hidden;
+    .option-div {
+      display: flex;
+      flex-direction: column;
+      padding: 5px 15px;
+      background-color: var(--lightGray);
+      .place-title {
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+      .place-info {
+        font-size: 1rem;
+        font-weight: 300;
+      }
     }
   }
 }
+input {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  background-color: var(--lightGray);
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+input[type="checkbox"] {
+  width: 25px !important;
+  height: 25px;
+}
+
 .date-picker {
   display: flex;
   justify-content: center;
+}
+
+.time-picker {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  align-items: center;
 }
 
 .splide__container {
@@ -96,7 +143,8 @@ form {
 
   margin: 0 !important;
   padding: 0 !important;
-  .day {
+  .day,
+  .term {
     margin: 5px;
     width: 90px;
     padding: 5px;
@@ -104,17 +152,25 @@ form {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     flex-shrink: 0;
+    border: 1px solid var(--green);
     cursor: pointer;
     .date-picker-day {
       font-size: 2rem;
       font-weight: 600;
       color: var(--green);
     }
+    .time-picker-time {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: -1px;
+    }
     .date-picker-day-of-week,
     .date-picker-month-year {
       font-size: 0.7rem;
-      font-weight: 400;
+      font-weight: 300;
     }
     &:hover {
       background-color: var(--pink);
@@ -264,7 +320,7 @@ form {
   top: 50%;
   transform: translateY(-50%);
   width: 2em;
-  z-index: 1;
+  z-index: 1 !important;
 }
 .splide__arrow svg {
   fill: #000;

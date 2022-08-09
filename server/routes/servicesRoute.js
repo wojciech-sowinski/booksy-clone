@@ -88,6 +88,28 @@ router.get('/services',verifyJWT,(req,res)=>{
 })
 
 
+router.get('/pservices',(req,res)=>{
+  
+  const placeId = req.query.activePlace
+
+  Service.find({placeId},{userId:0},(err,data)=>{
+    if(err){
+      console.log('services find failed',err);
+      res.status(404).json({
+        result: "save failed",
+      })}
+      else{
+        if(data){
+          res.status(200).json({services:data,result:true})
+        }
+      }
+      
+    }
+  )
+
+})
+
+
 router.delete("/services", verifyJWT, (req, res) => {
   const userId = req.userId;
   const _id = req.body.serviceId;

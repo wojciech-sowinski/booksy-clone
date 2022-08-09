@@ -189,7 +189,7 @@ export const addTimeFrame = (formData, dispatch) => {
     });
 };
 
-export const fecthTimeFrames = () => async (dispatch) => {
+export const fetchTimeFrames = () => async (dispatch) => {
   dispatch({ type: "fetchTimeFrames", payload: { loading: true } });
   await axios
     .get(config.serverUrl + "frames", {
@@ -288,3 +288,16 @@ export const deleteService = (id) => async (dispatch) => {
       fetchServices(dispatch)
     });
 };
+
+
+export const fetchFreeTerms =(activePlace, activeService,date,dayOfWeek,dispatch)=>{
+
+ 
+
+return axios.get(config.serverUrl + 'terms',{
+  params: {
+    activePlace, activeService,date ,dayOfWeek
+  }
+})
+
+}

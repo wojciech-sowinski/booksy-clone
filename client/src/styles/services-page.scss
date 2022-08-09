@@ -16,18 +16,19 @@
       .service-title {
         font-size: 1.4rem;
         font-weight: 100;
-        color: var(--lightGray);
+        color: var(--greenDark);
       }
       .service-properties {
         display: flex;
         column-gap: 20px;
-        background-color: var(--lightGray);
+        background-color: var(--pink);
+        color: var(--greenDark);
         padding: 5px 20px;
         margin-left: -32px;
       }
       .service-description {
         padding: 10px;
-        color: var(--lightGray);
+        color: var(--green);
       }
       &.suspend {
         background-color: rgb(156, 58, 58);
@@ -39,7 +40,7 @@
       .service-buttons {
         button {
           padding: 15px;
-
+          color: var(--green);
           text-align: center;
           aspect-ratio: 1/1;
           background-color: rgba(0, 0, 0, 0);

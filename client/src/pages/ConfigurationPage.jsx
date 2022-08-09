@@ -7,7 +7,7 @@ import ServicesPage from "./ServicesPage";
 import { useState } from "react";
 import PlacePicker from "../components/PlacePicker";
 import { useEffect } from "react";
-import { fetchPlaces, fetchServices } from "../actions/userActions";
+import { fetchPlaces, fetchServices, fetchTimeFrames } from "../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import "../styles/configuration-page.scss";
 import PlaceForm from "../components/PlaceForm";
@@ -33,6 +33,7 @@ const ConfigurationPage = () => {
 
     dispatch(fetchPlaces());
     fetchServices(dispatch)
+    dispatch(fetchTimeFrames())
   }, [activePlace, auth, userData]);
 
   return (

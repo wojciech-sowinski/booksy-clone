@@ -23,6 +23,7 @@ const userRoute = require("./routes/userRoute");
 const placesRoute = require("./routes/placesRoute");
 const timeFramesRoute = require("./routes/timeFramesRoute");
 const servicesRoute = require("./routes/servicesRoute");
+const termsRoute = require('./routes/termsRoute')
 
 app.get("/", (req, res) => {
   res.send("server is listening in port 5000");
@@ -32,3 +33,4 @@ app.use("/", cors(), userRoute);
 app.use("/", cors(), placesRoute);
 app.use("/", cors(), timeFramesRoute);
 app.use("/", cors(), servicesRoute);
+app.use("/", cors(), termsRoute);
