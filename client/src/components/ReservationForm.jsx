@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, createRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from 'react-dropdown-select';
 import '../styles/servicePicker.scss'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import { fetchFreeTerms } from "../actions/userActions";
+import AutoScrollOnMount from "./AutoScrollOnMount";
 import DataLoader from "./DataLoader";
 import axios from "axios";
 import config from "../config";
+import { useNavigate } from "react-router-dom";
 const ReservationForm = ({ activePlace }) => {
 
     const daysOfWeek = [
@@ -31,16 +32,17 @@ const ReservationForm = ({ activePlace }) => {
     const [guestConsent, setGuestConsent] = useState(false)
     const [options, setOptions] = useState([])
     const [optionsLoading, setOptionsLoading] = useState(false)
+    const [reservationSending, setReservationSending] = useState(false)
+    const [reservationSendingInfo, setReservationSendingInfo] = useState('Wysyłam rezerwację')
 
-    const scrollRef = useRef(null)
-
+    const scrollRef = createRef()
+    const navigate = useNavigate();
 
 
     const dispatch = useDispatch();
 
     const fetchServices = async (activePlace) => {
 
-        console.log('fetch services');
         setOptionsLoading(true)
         await axios.get(config.serverUrl + 'pservices', {
             params: {
@@ -61,16 +63,11 @@ const ReservationForm = ({ activePlace }) => {
                     }, 500);
                 }
             })
-
-
-
-
     }
 
     const submitHandle = async (e) => {
         e.preventDefault()
-
-
+        setReservationSending(true)
         await axios.post(config.serverUrl + 'bookit', {
             placeId: activePlace,
             serviceId: activeService,
@@ -82,13 +79,20 @@ const ReservationForm = ({ activePlace }) => {
             email: guestEmail,
             dayOfWeek: activeDate.dayOfWeek
         }).then(resolve => {
-            console.log(resolve.data, 'data from f');
+            if (resolve.data.success) {
+                setReservationSendingInfo('Rezerwacja wysłana')
+                setTimeout(() => {
+                    setReservationSending(false)
+                    setReservationSendingInfo('Wysyłam rezerwację')
+                    navigate('../')
+                }, 1000);
+            }
         })
 
     }
 
     const guestData = () => {
-        scrollInToView()
+
 
         return (<>
             <span><span className="number">4</span>Podaj swoje dane:</span>
@@ -113,12 +117,7 @@ const ReservationForm = ({ activePlace }) => {
         </>)
     }
 
-    const scrollInToView = (e) => {
-        setTimeout(() => {
-            scrollRef.current?.scrollIntoView({ behavior: "smooth", block: "center", inline: "center" })
-        }, 500);
 
-    }
 
     const formatTimeComponent = (number) => {
         return number.toLocaleString("en-US", {
@@ -165,32 +164,34 @@ const ReservationForm = ({ activePlace }) => {
     }
 
     const timePicker = () => {
-
         return (
             <>
-                <span><span className="number">3</span>Wybierz czas:</span>
-                <div className="time-picker">
+                <div >
+                    <span><span className="number">3</span>Wybierz czas:</span>
+                    <div className="time-picker">
 
-                    {termsLoading ? 'loading' : (<Splide
-                        id="terms"
-                        options={
-                            {
-                                maxWidth: 600,
-                                fixedWidth: 100,
-                                fixedHeight: 100,
-                                drag: true,
-                                pagination: false,
-                                breakpoints: {
-                                    1024: {
-                                        fixedWidth: 100,
-                                        fixedHeight: 100,
+                        {freeTerms.length && activeDate ? <><Splide
+                            id="terms"
+                            options={
+                                {
+                                    maxWidth: 600,
+                                    fixedWidth: 100,
+                                    fixedHeight: 100,
+                                    drag: true,
+                                    pagination: false,
+                                    breakpoints: {
+                                        1024: {
+                                            fixedWidth: 100,
+                                            fixedHeight: 100,
+                                        }
                                     }
                                 }
                             }
-                        }
-                    >
-                        {freeTerms}
-                    </Splide>)}
+                        >
+                            {freeTerms}
+                        </Splide></> : <div><span className="term-info">Brak wolnych terminów w wybranym dniu</span></div>}
+
+                    </div>
 
                 </div>
 
@@ -201,7 +202,7 @@ const ReservationForm = ({ activePlace }) => {
 
     const datePicker = () => {
 
-        scrollInToView()
+
         const pickDateHandle = (e) => {
             const fullDate = e.currentTarget.dataset.fulldate
             const dayOfWeek = e.currentTarget.dataset.dayofweek
@@ -259,10 +260,10 @@ const ReservationForm = ({ activePlace }) => {
 
 
 
-        return (<div ref={scrollRef}>
-            {scrollInToView()}
+        return (<div className="service-picker">
+
             <span ><span className="number">1</span> Wybierz usługę:</span>
-            {console.log('render service picker')}
+
             <Select
                 placeholder='wybierz usługę...'
 
@@ -277,7 +278,7 @@ const ReservationForm = ({ activePlace }) => {
                 itemRenderer={({ item, methods }) => (<div onClick={() => methods.addItem(item)} className="option-div">
                     <span className="place-title">{item.name}</span>
                     <div><span className="place-info"> Czas trwania: {item.duration} min.</span><span className="place-info"> Koszt: {item.price}pln</span></div>
-                    {item.description && <span className="place-info"> Opis: {item.description}</span>}
+                    {/* {item.description && <span className="place-info"> Opis: {item.description}</span>} */}
                 </div>)}
             />
         </div>)
@@ -294,7 +295,7 @@ const ReservationForm = ({ activePlace }) => {
             setActiveTerm('')
             setOptions([])
             setActiveDate('')
-            console.log('unmout');
+
 
         }
 
@@ -303,43 +304,13 @@ const ReservationForm = ({ activePlace }) => {
     return (
         <>
             <div className="reservation-form">
-                {activePlace && servicePicker(activePlace)}
+                {activePlace && <AutoScrollOnMount scrollTo={'.service-picker'} >{servicePicker(activePlace)}</AutoScrollOnMount>}
                 {optionsLoading && <DataLoader text={'Wczytuję katalog usług...'} />}
-                {activeService && <div ref={scrollRef}> {datePicker()} </div>}
-
-
-                {activeDate && (<div ref={scrollRef}>
-                    {scrollInToView()}
-                    <span><span className="number">3</span>Wybierz czas:</span>
-                    <div className="time-picker">
-
-                        {freeTerms.length && activeDate ? <><Splide
-                            id="terms"
-                            options={
-                                {
-                                    maxWidth: 600,
-                                    fixedWidth: 100,
-                                    fixedHeight: 100,
-                                    drag: true,
-                                    pagination: false,
-                                    breakpoints: {
-                                        1024: {
-                                            fixedWidth: 100,
-                                            fixedHeight: 100,
-                                        }
-                                    }
-                                }
-                            }
-                        >
-                            {freeTerms}
-                        </Splide></> : <div><span className="term-info">Brak wolnych terminów w wybranym dniu</span></div>}
-
-                    </div>
-
-                </div>)}
+                {activeService && <AutoScrollOnMount scrollTo={'.date-picker'}><div> {datePicker()} </div></AutoScrollOnMount>}
+                {activeDate && (<AutoScrollOnMount scrollTo={'.time-picker'} >{timePicker()}</AutoScrollOnMount>)}
                 {termsLoading && <DataLoader text={'Wczytuję dostępne terminy...'} />}
-                {(activeDate && activePlace && activeTerm) && <div ref={scrollRef}>{guestData()}</div>}
-
+                {(activeDate && activePlace && activeTerm) && <AutoScrollOnMount scrollTo={'.guest-data'}><div>{guestData()}</div></AutoScrollOnMount>}
+                {reservationSending && <DataLoader text={reservationSendingInfo} />}
             </div></>
     );
 }

@@ -3,10 +3,10 @@ const mongoose = require("mongoose");
 const schema = new mongoose.Schema({
   
   placeId:{
-    type:String,
+    type: mongoose.Schema.ObjectId,
     required: true,},
   serviceId:{
-    type:String,
+    type: mongoose.Schema.ObjectId,
     required: true,},
 serviceDate:{type:Date,
     required: true,},

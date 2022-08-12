@@ -54,7 +54,7 @@ const PlacePicker = ({ setActivePlace, setAddNewPlace }) => {
         placeholder='wybierz miejsce...'
         clearable
         options={options}
-
+        noDataRenderer={() => 'Brak miejsc. Dodaj nowe.'}
         onChange={(values) => setActivePlace(values[0]?._id)}
         onClearAll={(values) => setActivePlace('')}
         itemRenderer={({ item, methods }) => (<div onClick={() => methods.addItem(item)} className="option-div">

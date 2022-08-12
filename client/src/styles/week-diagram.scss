@@ -4,10 +4,10 @@
   flex-direction: column;
   row-gap: 1px;
   > span {
-    color: var(--lightGray);
+    color: var(--greenDark);
     padding: 30px;
     svg {
-      color: rgb(192, 149, 55);
+      color: var(--pink);
     }
   }
   .day {
@@ -34,7 +34,7 @@
       align-items: flex-end;
       .hour {
         flex-grow: 1;
-        background-color: var(--lightGray);
+        background-color: var(--grayBlue);
         width: calc(100% / 25);
         height: 100%;
         padding: 5px;

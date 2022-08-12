@@ -52,3 +52,16 @@ input[type="submit"].submit-button {
   transition: 0.3s;
   cursor: pointer;
 }
+
+.add-reservation-button {
+  display: block;
+  width: 250px;
+  border: none;
+  padding: 10px 30px;
+  margin: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: var(--green);
+  color: #fff;
+  text-decoration: none;
+}

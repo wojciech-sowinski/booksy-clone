@@ -3,7 +3,11 @@ const Place = require("../models/place");
 const Service = require("../models/service");
 const TimeFrame = require("../models/timeFrame");
 const Reservation = require('../models/reservation')
+const { verifyJWT } = require("../middleware/verifyJWT");
+const { db } = require("../models/place");
+const { isObjectIdOrHexString } = require("mongoose");
 const router = express.Router();
+const ObjectId = require('mongodb').ObjectID
 
 const checkTermCollides = async (dayOfWeek,placeId,serviceId,serviceStart,serviceEnd,serviceDate)=>{
 
@@ -84,11 +88,10 @@ const checkTermCollides = async (dayOfWeek,placeId,serviceId,serviceStart,servic
 }
 
 router.post('/bookit',async (req,res)=>{
-    console.log(req.body);
 
     const {dayOfWeek,placeId,serviceId,serviceStart,serviceEnd,serviceDate,clientFirstName,clientLastName,email} = req.body
 
-const check =await checkTermCollides(dayOfWeek,placeId,serviceId,serviceStart,serviceEnd,serviceDate)
+    const check =await checkTermCollides(dayOfWeek,placeId,serviceId,serviceStart,serviceEnd,serviceDate)
 
 if (check.result) {
     console.log('dodajemy');    
@@ -106,7 +109,6 @@ if (check.result) {
     
     res.json({success:false,result:'not available'}) 
 }
-
 })
 
 
@@ -163,6 +165,54 @@ router.get('/terms',async (req,res)=>{
         res.json({success:false,result:'service search failed'})
    }
     res.json({success:true,result:'free terms fetched',freeTerms})
+})
+
+router.get('/reservations',verifyJWT,async (req,res)=>{
+    const placeId=req.query.activePlace
+    try {
+        const reservations = await Reservation.aggregate([
+            {
+                $match: {
+                    placeId: ObjectId(req.query.activePlace)
+                }
+            },
+            {
+                $lookup:{
+                    from:'services',
+                    localField:'serviceId',
+                    foreignField: "_id",                    
+                    as: "serviceInfo",                    
+                }
+            }
+        ])
+        res.json({success:true,reservations})
+    } catch (error) {
+        console.log('reservation: ',error);
+        res.json({success:false,result:'reservation search failed'})
+    }
+})
+
+router.delete("/reservations", verifyJWT, (req, res) => {
+    
+    console.log(ObjectId(req.body.reservationId));
+    
+    const _id = new ObjectId(req.body.reservationId)
+  
+    Reservation.findOneAndDelete({_id},(err,data)=>{
+      if(err){
+        console.log('reservation delete failed',err);
+        res.json({success:false,result:'delete failed'})
+        
+    }else{
+        console.log(data);
+        
+        if(data){
+            res.json({success:true,result:'servise deleted'})
+        }else{
+            res.json({success:false,result:'delete failed'})
+        }
+      }
+    })
 })
 
 module.exports = router

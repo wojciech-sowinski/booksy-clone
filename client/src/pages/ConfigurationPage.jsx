@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../styles/configuration-page.scss";
 import PlaceForm from "../components/PlaceForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ReservationForm from '../components/ReservationForm'
 import {
   faCalendarCheck,
   faListCheck,
@@ -75,6 +76,12 @@ const ConfigurationPage = () => {
                 <Route
                   path="/"
                   element={<ReservationsPage activePlace={activePlace} />}
+                />
+                <Route
+                  path="/reservation"
+                  element={
+                    <ReservationForm activePlace={activePlace} />
+                  }
                 />
                 <Route
                   path="/general"

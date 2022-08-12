@@ -1,7 +1,17 @@
 .fc {
-  color: var(--lightGray);
+  color: var(--greenDark);
   * {
     z-index: 0 !important;
+  }
+  .fc-daygrid-day-number {
+    // background-color: var(--pink);
+    margin: 5px;
+    border-radius: 40px;
+    border: 1px solid var(--green);
+    width: 35px;
+    aspect-ratio: 1/1;
+    text-align: center;
+    font-weight: 500;
   }
   table {
     border: none !important;
@@ -12,19 +22,73 @@
   }
   .fc-col-header-cell {
     background-color: var(--green);
+    color: var(--lightGray);
     border: none !important;
   }
   .fc-day-today {
-    background-color: var(--green) !important;
+    background-color: var(--pink) !important;
   }
-  .fc-daygrid-event {
-    white-space: pre-line;
-    font-size: 0.7rem;
-    background-color: var(--lightGray);
-    border: none;
-    padding: 3px;
+  .fc-daygrid-day-events {
     .fc-event-main {
       color: var(--greenDark) !important;
+    }
+    .fc-daygrid-event {
+      display: flex;
+      padding: 3px;
+      flex-direction: column;
+      align-items: flex-start;
+      border: 1px solid var(--green);
+      row-gap: 5px;
+
+      .event-title {
+        display: none;
+
+        font-weight: 500;
+        font-size: 1rem;
+      }
+      .event-time {
+        padding: 3px 10px;
+        width: 100%;
+        color: var(--lightGray);
+        background-color: var(--green);
+        display: flex;
+        justify-content: space-between;
+        svg {
+          transition: 0.3s;
+          // transform: rotate(180deg);
+        }
+      }
+      .event-delete-button {
+        display: none;
+        font-size: 0.8rem;
+      }
+      .event-client {
+        display: none;
+        font-size: 0.8rem;
+      }
+      &.open {
+        .event-title {
+          display: block;
+        }
+
+        .event-client {
+          display: block;
+        }
+        .event-delete-button {
+          display: block;
+          width: 100%;
+          color: var(--greenDark);
+          background-color: var(--pink);
+        }
+
+        .event-time {
+          svg {
+            transition: 0.3s;
+            transform: rotate(180deg);
+            color: var(--pink);
+          }
+        }
+      }
     }
   }
 }
