@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Advent+Pro:wght@200;400;700&family=Montserrat:wght@200;300;400;600&family=Signika+Negative:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Advent+Pro:wght@100;200;400;700&family=Montserrat:wght@100;200;300;400;600&family=Signika+Negative:wght@100;200;300;400;500;600;700&display=swap");
 
 // font-family: 'Advent Pro', sans-serif;
 // font-family: 'Montserrat', sans-serif;
@@ -33,21 +33,4 @@
 
 .App {
   position: relative;
-  .test-nav {
-    display: flex;
-    justify-content: flex-end;
-    list-style: none;
-    column-gap: 30px;
-
-    height: 60px;
-    font-size: 1.2rem;
-    align-items: center;
-    background-color: rgb(255, 255, 255);
-    a {
-      text-decoration: none;
-      padding: 35px 35px;
-      text-transform: uppercase;
-      color: var(--green);
-    }
-  }
 }
