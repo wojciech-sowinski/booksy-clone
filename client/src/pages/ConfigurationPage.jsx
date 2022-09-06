@@ -32,6 +32,7 @@ const ConfigurationPage = () => {
 
   useEffect(() => {
 
+
     dispatch(fetchPlaces());
     fetchServices(dispatch)
     dispatch(fetchTimeFrames())

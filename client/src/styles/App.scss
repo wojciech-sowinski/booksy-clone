@@ -18,7 +18,7 @@
   font-weight: 300;
   --base: rgb(255, 255, 255);
   --purpleDark: #2e151b;
-  --pink: #e79c6a;
+  --pink: rgb(231, 156, 106);
   --green: #4b81d3;
   --greenDark: #0a2e64;
   --lightGray: rgb(255, 255, 255);
@@ -33,4 +33,6 @@
 
 .App {
   position: relative;
+
+  overflow: hidden;
 }

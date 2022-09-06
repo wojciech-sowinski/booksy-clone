@@ -58,7 +58,7 @@ const HomePage = () => {
 
                         viewport={{ once: true }}
 
-                        className={'dark'}>
+                        className={'dark blue'}>
                         <p> <strong>BookIn</strong> to aplikacja która pomoże twojej firmie rozbudować oraz zoptymalizować rezerwację klientów. </p>
                         <p> <strong>Jakąkolwiek</strong> prowadzisz działalność, BookIn dostosuje się i ułatwi zarządzanie rezerwacjami w Twojej firmie.</p>
 
@@ -72,7 +72,7 @@ const HomePage = () => {
                         transition={{ duration: 1, delay: 1 }}
 
                         viewport={{ once: true }}
-                        className={'dark'}>
+                        className={'dark orange'}>
                         <p>
                             <strong> Posiadasz kilka placówek swojej firmy?</strong>
                         </p>
@@ -88,73 +88,82 @@ const HomePage = () => {
                         <div className='cloud-overlay'></div>
                     </div>
 
-                    <motion.div
-                        ref={ref}
+
+
+                    <motion.div ref={ref}
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         transition={{ duration: 1, delay: 1 }}
 
                         viewport={{ once: true }}>
+                        <img src={workhours} alt="" />
+                        <motion.div
+                            ref={ref}
+                            initial={{ opacity: 0, x: -100 }}
+                            whileInView={{ opacity: 1, x: '10%' }}
+                            transition={{ duration: 1, delay: 1 }}
 
-                        <Splide
-                            options={
-                                {
-                                    width: '100%',
-                                    type: 'loop',
-                                    autoplay: true,
-                                    pauseOnHover: false,
-                                    interval: 13000,
-                                    speed: 2000,
-                                    drag: false,
-                                    pagination: false,
-                                    arrows: false,
-                                    // breakpoints: {
-                                    //     1024: {
-                                    //         fixedWidth: 100,
-                                    //         fixedHeight: 100,
-                                    //     }
-                                    // }
-                                }
-                            }>
-                            <SplideSlide>
-                                <img src={workhours} alt="" />
-                                <motion.div
-                                    ref={ref}
-                                    initial={{ opacity: 0, x: -100 }}
-                                    whileInView={{ opacity: 1, x: '100%' }}
-                                    transition={{ duration: 1, delay: 1 }}
+                            viewport={{ once: true }}
 
-                                    viewport={{ once: true }}
+                            className={'dark blue'}>
+                            <p> <strong>Pokaż swoim klientom, że jesteś dostępny!</strong> Każde Twoje miejsce może posiadać różne godziny otwarcia i katalog usług.</p>
 
-                                    className={'dark'}>
-                                    <p> <strong>Pokaż swoim klientom, że jesteś dostępny!</strong> </p>
+                            <p><strong>Dostosuj</strong>Godziny pracy do potrzeb swoich oraz klientów.</p>
 
 
 
-                                </motion.div>
-                            </SplideSlide>
-                            <SplideSlide>
-                                <img src={services} alt="" />
-                                <motion.div
-                                    ref={ref}
-                                    initial={{ opacity: 0, x: '200%' }}
-                                    whileInView={{ opacity: 1, x: 100 }}
-                                    transition={{ duration: 2, delay: 1 }}
-
-                                    viewport={{ once: true }}
-
-                                    className={'dark'}>
-
-                                    <p> <strong>Dodaj</strong> godziny pracy oraz katalog usług jak najszybciej. To proste!</p>
-
-
-                                </motion.div>
-                            </SplideSlide>
-
-                        </Splide>
-
-
+                        </motion.div>
                     </motion.div>
+
+
+
+
+
+
+
+
+
+
+                </section>
+                <section className='services-hours'>
+                    <div className='back-video'>
+                        <video autoPlay={true} loop={true} muted={true} src={people}></video>
+                        <div className='cloud-overlay'></div>
+                    </div>
+
+
+
+
+                    <motion.div ref={ref}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 1, delay: 1 }}
+
+                        viewport={{ once: true }}>
+                        <img src={services} alt="" />
+                        <motion.div
+                            ref={ref}
+                            initial={{ opacity: 0, x: '0%' }}
+                            whileInView={{ opacity: 1, x: 100 }}
+                            transition={{ duration: 2, delay: 1 }}
+
+                            viewport={{ once: true }}
+
+                            className={'dark orange'}>
+
+                            <p> <strong>Dodaj</strong> godziny pracy oraz katalog usług jak najszybciej. </p>
+
+                            <p><strong>To proste!</strong>Możesz posiadać nieograniczoną ilość usług dostosowanych do możliwości twojej firmy.</p>
+
+
+                        </motion.div>
+                    </motion.div>
+
+
+
+
+
+
 
 
                 </section>
@@ -171,13 +180,14 @@ const HomePage = () => {
                         <motion.div
                             ref={ref}
                             initial={{ opacity: 0, x: -100 }}
-                            whileInView={{ opacity: 1, x: '80%' }}
+                            whileInView={{ opacity: 1, x: '10%' }}
                             transition={{ duration: 2, delay: 2 }}
 
                             viewport={{ once: true }}
 
-                            className={'dark'}>
-                            <p> <strong>Zarządzaj</strong>rezerwacjami klientów w łatwy sposób. </p>
+                            className={'dark blue'}>
+                            <p> <strong>Zarządzaj</strong>Rezerwacjami klientów w łatwy sposób.</p>
+                            <p> <strong>Kontroluj</strong>Dokonane rezerwacje w wygodnym widoku całego miesiąca. </p>
 
 
 

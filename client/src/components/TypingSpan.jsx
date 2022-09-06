@@ -7,13 +7,9 @@ const TypingSpan = () => {
     const [showLogo, setShowLogo] = useState(false)
     const [typingTopPos, setTypingTopPos] = useState('30%')
 
-    useEffect(() => {
-
-
-    }, [])
 
     return (<>
-        {/* {addLetters('restauiracje', 1000, setText)} */}
+
         < div className="typing-span" style={{ top: typingTopPos }}>
             <Typewriter
 

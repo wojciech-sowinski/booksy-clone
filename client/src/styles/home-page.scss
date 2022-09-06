@@ -50,6 +50,19 @@
         color: var(--pink);
       }
     }
+
+    @media screen and (max-width: 768px) {
+      font-size: 2.5rem;
+      img {
+        max-width: 400px;
+      }
+    }
+    @media screen and (max-width: 480px) {
+      font-size: 1.7rem;
+      img {
+        max-width: 250px;
+      }
+    }
   }
 
   main {
@@ -61,6 +74,7 @@
       align-items: center;
       position: relative;
       background-color: #fff;
+      min-height: 100vh;
 
       .back-video {
         position: absolute;
@@ -97,12 +111,19 @@
         }
       }
       .dark {
-        z-index: 1;
-        background-color: rgba(75, 129, 211, 0.6);
-        border-radius: 20px;
+        z-index: 2;
+
+        // border-radius: 20px;
         color: rgb(0, 0, 0);
         display: flex;
         flex-direction: column;
+        backdrop-filter: blur(3px);
+        &.blue {
+          background-color: rgba(75, 129, 211, 0.6);
+        }
+        &.orange {
+          background-color: rgba(214, 87, 3, 0.6);
+        }
         strong {
           font-size: 4rem;
           color: #fff;
@@ -129,36 +150,23 @@
         }
       }
       img {
-        width: 600px;
+        width: 100%;
         z-index: 1;
       }
     }
     section.services-hours {
-      > * {
-        flex-grow: 1;
-      }
-      .splide {
-        position: relative;
-        width: 100%;
-        li.splide__slide {
-          position: relative;
-          text-align: left;
-          img {
-            width: 100%;
-          }
-          div.dark {
-            display: flex;
-            flex-direction: column;
-            row-gap: 50px;
-            backdrop-filter: blur(5px);
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50%;
-            height: 70%;
-            justify-content: center;
-          }
+      display: flex;
+      flex-direction: column;
+      div {
+        padding: 40px 0;
+        display: flex;
+        img {
+          width: 150%;
+          object-fit: cover;
         }
+      }
+      .dark {
+        position: absolute;
       }
     }
 
@@ -183,9 +191,55 @@
         position: absolute;
         bottom: 100px;
         left: 0;
-        width: 50%;
-        height: 50%;
+        width: 80%;
+        height: 80%;
         justify-content: center;
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    main {
+      section {
+        padding: 10px;
+        flex-direction: column;
+        > * {
+          width: 90%;
+        }
+        div.dark {
+          p {
+            font-size: 1.3rem;
+            strong {
+              font-size: 2rem;
+              margin: 30px 0;
+            }
+          }
+        }
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+    @media screen and (max-width: 480px) {
+      main {
+        section {
+          div.dark {
+            p {
+              font-size: 1.2rem;
+              strong {
+                font-size: 2rem;
+                margin: 30px 0;
+              }
+            }
+          }
+        }
+        section.services-hours {
+          display: none;
+        }
+        section.calendar-demo {
+          .dark {
+            width: 80%;
+          }
+        }
       }
     }
   }
