@@ -1,6 +1,5 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../actions/userActions";
 const LoginButton = () => {
   const { auth } = useSelector((state) => state.userDataReducer);
@@ -14,7 +13,6 @@ const LoginButton = () => {
       navigate('/')
     } else {
       dispatch({ type: "showModal", payload: "LoginForm" });
-
     }
   };
 

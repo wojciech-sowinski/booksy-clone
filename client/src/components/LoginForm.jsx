@@ -16,7 +16,6 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
   const { response, loading, userData } = useSelector(
     (state) => state.userDataReducer
@@ -44,7 +43,7 @@ const LoginForm = () => {
     });
   };
 
-  useEffect(() => {});
+  useEffect(() => { });
 
   return (
     <form onSubmit={submitHandle} className="login-form">

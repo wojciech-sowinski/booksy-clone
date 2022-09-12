@@ -34,11 +34,8 @@ const ReservationForm = ({ activePlace }) => {
     const [optionsLoading, setOptionsLoading] = useState(false)
     const [reservationSending, setReservationSending] = useState(false)
     const [reservationSendingInfo, setReservationSendingInfo] = useState('Wysyłam rezerwację')
-
     const scrollRef = createRef()
     const navigate = useNavigate();
-
-
     const dispatch = useDispatch();
 
     const fetchServices = async (activePlace) => {
@@ -51,7 +48,6 @@ const ReservationForm = ({ activePlace }) => {
         })
             .then(resolve => {
                 if (resolve.data.result) {
-
                     const fetchedServices = resolve.data.services.map(service => {
                         return {
                             ...service, label: `${service.name}`, value: service._id
@@ -88,12 +84,9 @@ const ReservationForm = ({ activePlace }) => {
                 }, 1000);
             }
         })
-
     }
 
     const guestData = () => {
-
-
         return (<>
             <span><span className="number">4</span>Podaj swoje dane:</span>
             <form onSubmit={submitHandle} className="guest-data">
@@ -113,11 +106,8 @@ const ReservationForm = ({ activePlace }) => {
                 </div>
 
             </form>
-
         </>)
     }
-
-
 
     const formatTimeComponent = (number) => {
         return number.toLocaleString("en-US", {
@@ -158,7 +148,6 @@ const ReservationForm = ({ activePlace }) => {
                         setFreeTerms(terms)
                         setTermsLoading(false)
                     }, 500);
-
                 }
             })
     }
@@ -169,7 +158,6 @@ const ReservationForm = ({ activePlace }) => {
                 <div >
                     <span><span className="number">3</span>Wybierz czas:</span>
                     <div className="time-picker">
-
                         {freeTerms.length && activeDate ? <><Splide
                             id="terms"
                             options={
@@ -201,7 +189,6 @@ const ReservationForm = ({ activePlace }) => {
     }
 
     const datePicker = () => {
-
 
         const pickDateHandle = (e) => {
             const fullDate = e.currentTarget.dataset.fulldate
@@ -258,27 +245,20 @@ const ReservationForm = ({ activePlace }) => {
 
     const servicePicker = (activePlace) => {
 
-
-
         return (<div className="service-picker">
-
             <span ><span className="number">1</span> Wybierz usługę:</span>
-
             <Select
                 placeholder='wybierz usługę...'
-
                 closeOnSelect
                 clearable
                 options={options}
                 required
-
                 noDataRenderer={() => 'Brak usług...'}
                 onChange={(values) => setActiveService(values[0]?._id)}
                 onClearAll={(values) => setActiveService('')}
                 itemRenderer={({ item, methods }) => (<div onClick={() => methods.addItem(item)} className="option-div">
                     <span className="place-title">{item.name}</span>
                     <div><span className="place-info"> Czas trwania: {item.duration} min.</span><span className="place-info"> Koszt: {item.price}pln</span></div>
-                    {/* {item.description && <span className="place-info"> Opis: {item.description}</span>} */}
                 </div>)}
             />
         </div>)

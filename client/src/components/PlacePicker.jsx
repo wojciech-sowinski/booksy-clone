@@ -48,7 +48,6 @@ const PlacePicker = ({ setActivePlace, setAddNewPlace }) => {
   return (
     <div className="place-picker">
       <span className="title">Twoje miejsca:</span>
-
       <div><Select
         separator
         placeholder='wybierz miejsce...'

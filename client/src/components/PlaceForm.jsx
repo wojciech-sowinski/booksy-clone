@@ -17,7 +17,6 @@ const PlaceForm = ({ activePlace, setActivePlace }) => {
       propertyValue = e.target.value;
     }
     const propertyName = e.target.name;
-
     setFormData({ ...formData, [propertyName]: propertyValue });
   };
 

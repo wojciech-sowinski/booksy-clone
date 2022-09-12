@@ -31,8 +31,6 @@ const ConfigurationPage = () => {
 
 
   useEffect(() => {
-
-
     dispatch(fetchPlaces());
     fetchServices(dispatch)
     dispatch(fetchTimeFrames())
@@ -58,7 +56,6 @@ const ConfigurationPage = () => {
                 <FontAwesomeIcon icon={faReceipt} />
                 <span> rezerwacje</span>
               </NavLink>
-
               <NavLink to="./general">
                 <FontAwesomeIcon icon={faListCheck} />
                 <span> ustawienia ogólne</span>
@@ -101,7 +98,6 @@ const ConfigurationPage = () => {
                   path="/servicescatalog"
                   element={<ServicesPage activePlace={activePlace} />}
                 />
-
               </Routes>
             </div>
           </>

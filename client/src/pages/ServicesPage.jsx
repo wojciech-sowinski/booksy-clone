@@ -21,18 +21,12 @@ const ServicesPage = ({ activePlace }) => {
     setActiveService('')
   }
 
-
-
-
   const showForm = (serviceId) => {
-
-
     setActiveService(serviceId)
     setShowServiceForm(true)
   }
 
   const renderServices = (activePlace, services) => {
-
 
     const filteredServices = services?.filter(service => service.placeId === activePlace)
 
@@ -52,9 +46,7 @@ const ServicesPage = ({ activePlace }) => {
         <div className="service-buttons">
           <button onClick={() => { showForm(service._id) }}><FontAwesomeIcon icon={faPenToSquare} /></button>
           <button onClick={() => { dispatch(deleteService(service._id)) }}><FontAwesomeIcon icon={faTrashCan} /></button>
-
         </div>
-
       </li>)
     })
 

@@ -115,7 +115,6 @@ const WeekDiagram = ({ activePlace }) => {
 
   useEffect(() => {
     dispatch(fetchTimeFrames());
-
   }, [activePlace]);
 
   return (

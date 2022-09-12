@@ -17,13 +17,11 @@ const ServiceForm = ({ activeService, activePlace, closeForm }) => {
   const submitHandle = (e) => {
     e.preventDefault();
     if (activeService) {
-
       updateService({ ...formData }, dispatch)
     } else {
 
       addService(activePlace, { ...formData, placeId: activePlace }, dispatch)
     }
-
     closeForm()
   };
 
@@ -40,15 +38,12 @@ const ServiceForm = ({ activeService, activePlace, closeForm }) => {
       propertyValue = e.target.value;
     }
     const propertyName = e.target.name;
-
     setFormData({ ...formData, [propertyName]: propertyValue });
   };
 
   useEffect(() => {
-
     if (activeService) {
       const activeServiceData = services.filter(service => service._id === activeService)
-
       setFormData(...activeServiceData)
     }
 
@@ -57,8 +52,6 @@ const ServiceForm = ({ activeService, activePlace, closeForm }) => {
   return (<>
     <div onClick={closeForm} className="overlay"></div>
     <form onSubmit={submitHandle} className="service-form">
-
-
       <input
         type="text"
         placeholder="Nazwa Usługi"
@@ -144,9 +137,7 @@ const ServiceForm = ({ activeService, activePlace, closeForm }) => {
         )}
       </div>
     </form>
-
   </>
-
   );
 };
 

@@ -16,11 +16,9 @@ const TimeFrameForm = ({ dayIndex, dayName, closeForm, placeId }) => {
     const startTime = start.split(":");
     const startH = parseInt(startTime[0]);
     const startM = parseInt(startTime[1]);
-
     const endTime = end.split(":");
     const endH = parseInt(endTime[0]);
     const endM = parseInt(endTime[1]);
-
     const startTimeinM = startH * 60 + startM;
     const endTimeinM = endH * 60 + endM;
 
