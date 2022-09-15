@@ -14,9 +14,9 @@ import places1 from '../media/places-1.png'
 import places2 from '../media/places-2.png'
 import places3 from '../media/places-3.png'
 import logoLayer1 from '../media/logo sq-1.png'
-import logoLayer2 from '../media/logo sq-2_1.png'
-import logoLayer3 from '../media/logo sq-3_1.png'
-import logoLayer4 from '../media/logo sq-4_1.png'
+import logoLayer2 from '../media/logo sq-2.png'
+import logoLayer3 from '../media/logo sq-3.png'
+import logoLayer4 from '../media/logo sq-4.png'
 import hours from '../media/workhours.png'
 import addservices from '../media/services.png'
 
@@ -40,8 +40,9 @@ const HomePage = () => {
                 <section className='orange'>
                     <div className='logo-animation'>
                         <img src={logoLayer4} alt="" />
+                        <img src={logoLayer4} alt="" />
                         <img src={logoLayer3} alt="" />
-                        <img src={logoLayer2} alt="" />
+                        {/* <img src={logoLayer2} alt="" /> */}
                         <img src={logoLayer1} alt="" />
                     </div>
                     <div>
@@ -81,6 +82,17 @@ const HomePage = () => {
                             <p>
                                 <strong> Posiadasz kilka placówek swojej firmy?</strong>
                             </p>
+
+
+
+                        </motion.div>
+                        <motion.div
+                            ref={ref}
+                            initial={{ opacity: 0, y: 200 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                            viewport={{ once: true }}>
+
                             <p> <strong>Nie ma sprawy!</strong> W BookIn możesz dodać wiele placówek w różnych miejscach!</p>
 
 

@@ -4,6 +4,8 @@ import WeekDiagram from "../components/WeekDiagram";
 import ReservationsPage from "./ReservationsPage";
 import GeneralSettingsPage from "./GeneralSettingsPage";
 import ServicesPage from "./ServicesPage";
+import ReservationPage from "./AddReservationPage";
+import ApiKeysPage from "./ApiKeysPage";
 import { useState } from "react";
 import PlacePicker from "../components/PlacePicker";
 import { useEffect } from "react";
@@ -19,6 +21,7 @@ import {
   faBusinessTime,
   faReceipt,
   faStar,
+  faWrench
 } from "@fortawesome/free-solid-svg-icons";
 
 const ConfigurationPage = () => {
@@ -68,6 +71,11 @@ const ConfigurationPage = () => {
                 <FontAwesomeIcon icon={faStar} />
                 <span> usługi</span>
               </NavLink>
+              <NavLink to={`./apikeys`}>
+
+                <FontAwesomeIcon icon={faWrench} />
+                <span> API & Links</span>
+              </NavLink>
             </nav>
             <div className="configuration-pages-wrapper">
               <Routes>
@@ -98,6 +106,11 @@ const ConfigurationPage = () => {
                   path="/servicescatalog"
                   element={<ServicesPage activePlace={activePlace} />}
                 />
+                <Route
+                  path="/apikeys"
+                  element={<ApiKeysPage activePlace={activePlace} />}
+                />
+
               </Routes>
             </div>
           </>

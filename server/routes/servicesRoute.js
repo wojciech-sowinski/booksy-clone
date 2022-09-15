@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 
 const Service = require("../models/service");
 
+
 const { verifyJWT } = require("../middleware/verifyJWT");
 
 router.post("/services", verifyJWT, (req, res) => {
@@ -92,6 +93,7 @@ router.get('/pservices',(req,res)=>{
   
   const placeId = req.query.activePlace
 
+  
   Service.find({placeId},{userId:0},(err,data)=>{
     if(err){
       console.log('services find failed',err);

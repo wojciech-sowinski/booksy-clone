@@ -19,6 +19,7 @@ import FormModal from "./components/FormModal";
 import config from "./config";
 import HomePage from "./pages/HomePage";
 import MainNav from "./components/MainNav";
+import ReservationPage from "./pages/AddReservationPage";
 
 function App() {
   const { info, loading, userData, auth } = useSelector(
@@ -44,6 +45,10 @@ function App() {
 
             <Route path="/register" element={<RegistrationForm />} />
             {auth && <Route path="/config/*" element={<ConfigurationPage />} />}
+            <Route
+              path="/addreservation"
+              element={<ReservationPage />}
+            />
             <Route path="*" element={<HomePage />} />
           </Routes>
         </div>

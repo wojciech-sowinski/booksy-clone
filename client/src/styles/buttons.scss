@@ -53,9 +53,15 @@ input[type="submit"].submit-button {
   cursor: pointer;
 }
 
-.add-reservation-button {
+.button-bar {
+  padding: 30px;
+  display: flex;
+}
+
+.add-reservation-button,
+.refresh-reservation-button {
   display: block;
-  width: 250px;
+  width: 300px;
   border: none;
   padding: 10px 30px;
   margin: 10px;
@@ -64,4 +70,9 @@ input[type="submit"].submit-button {
   background-color: var(--green);
   color: #fff;
   text-decoration: none;
+  text-align: center;
+}
+
+.refresh-reservation-button {
+  background-color: #09977d;
 }

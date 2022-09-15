@@ -19,8 +19,6 @@ const MainNav = () => {
 
   return (
     <ul className={`main-nav ${location.pathname !== '/' ? 'dark' : ''}`}>
-      {console.log(location)}
-
       <Link to="/"><img className="menu-logo-img" src={logomenu} alt="logo" /></Link>
       <FontAwesomeIcon onClick={() => { setShowMenu(prev => !prev) }} className="burger-icon" icon={faBars} />
       <div className={showMenu ? 'show' : ''} onClick={() => { setShowMenu(false) }}>

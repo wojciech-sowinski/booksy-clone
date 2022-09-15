@@ -3,7 +3,7 @@ import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 import interactionPlugin from "@fullcalendar/interaction"
 import allLocales from '@fullcalendar/core/locales-all';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown, faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faTrash, faPlus, faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import '../styles/callendar.scss'
 import ReservationForm from '../components/ReservationForm';
 import { useState, useEffect } from 'react';
@@ -114,10 +114,15 @@ const ReservationsPage = ({ activePlace }) => {
   return (
     <div className="reservations-page">
       <main>
-        <div>
-          <NavLink className={'add-reservation-button'} to="./reservation">
-            <span><FontAwesomeIcon icon={faPlus} /> Dodaj rezerwacje</span>
-          </NavLink>
+        <div className='button-bar'>
+          <div>
+            <NavLink className={'add-reservation-button'} to="./reservation">
+              <span><FontAwesomeIcon icon={faPlus} />  Dodaj rezerwacje</span>
+            </NavLink>
+          </div>
+          <div className={'refresh-reservation-button'} onClick={fetchReservations}>
+            <span><FontAwesomeIcon icon={faArrowsRotate} />  Odśwież </span>
+          </div>
         </div>
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin, timeGridPlugin]}

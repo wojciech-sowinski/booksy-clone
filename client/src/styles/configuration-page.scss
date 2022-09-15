@@ -3,6 +3,22 @@
   background: linear-gradient(rgb(255, 255, 255), var(--base));
   min-height: calc(100vh - 60px);
 
+  .api-links {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 30px;
+
+    font-size: 1.5rem;
+    strong {
+      color: var(--greenDark);
+      font-weight: 600;
+    }
+    a {
+      text-decoration: none;
+    }
+  }
+
   nav.configuration-nav {
     display: flex;
     z-index: 0;

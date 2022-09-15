@@ -6,6 +6,7 @@ const config = require("../config");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Place = require("../models/place");
+const ObjectId = require('mongodb').ObjectID
 
 const { verifyJWT } = require("../middleware/verifyJWT");
 
@@ -87,5 +88,24 @@ router.delete("/places", verifyJWT, (req, res) => {
     }
   });
 });
+
+
+router.get('/pplace',(req,res)=>{
+  
+  const placeId = req.query.activePlace
+
+  Place.findById(ObjectId(placeId),({_id:0,userId:0,emailSend:0,created:0,daysOff:0}),(err,data)=>{
+    if(err){
+      console.log("PPlace find is failed", err);
+      res.json({ result: false });
+      
+    }else{
+      
+      res.json({ success: true, place: data });
+    }
+  })
+  
+
+})
 
 module.exports = router;

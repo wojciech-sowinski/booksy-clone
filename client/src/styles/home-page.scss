@@ -73,22 +73,40 @@
       padding: 100px 20px;
 
       &.orange {
-        background-color: var(--pink);
+        background-color: #fff;
+        // background-color: var(--pink);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-image: url("../media/polygons-aplha.png");
+        background-size: 100%;
         color: #000;
       }
       &.blue {
-        background-color: var(--green);
+        background-color: #fff;
+        // background-color: var(--green);
         color: #000;
+        background-image: url("../media/polygons-aplha.png");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100%;
       }
 
       p {
         font-size: 1.6rem;
+        padding: 0px 30px 30px 30px;
+        background-color: rgba(255, 255, 255, 0.322);
+        border-radius: 15px;
+        backdrop-filter: blur(5px);
+        // -webkit-box-shadow: 8px 8px 24px -18px rgba(0, 0, 0, 0.95);
+        // -moz-box-shadow: 8px 8px 24px -18px rgba(0, 0, 0, 0.95);
+        box-shadow: 8px 8px 30px -18px rgba(0, 0, 0, 0.95);
         strong {
           padding: 30px 0px;
           // transform: translateX(-10%);
           display: block;
-          font-size: 5rem;
+          font-size: 4.5rem;
           font-weight: 600;
+          color: rgb(71, 71, 71);
         }
       }
       > div {
@@ -109,17 +127,17 @@
           left: 0;
         }
         img:nth-child(1) {
-          animation: flow infinite;
-          animation-duration: 60s;
-        }
-        img:nth-child(2) {
-          animation: flow infinite;
-          animation-duration: 40s;
+          animation: flow infinite linear;
+          animation-duration: 120s;
           animation-direction: reverse;
         }
+        img:nth-child(2) {
+          animation: flow infinite linear;
+          animation-duration: 80s;
+        }
         img:nth-child(3) {
-          animation: flow infinite;
-          animation-duration: 30s;
+          animation: flow infinite linear;
+          animation-duration: 60s;
           animation-direction: reverse;
         }
       }
@@ -127,7 +145,7 @@
   }
 
   .places-splide-div {
-    border: 5px solid rgb(87, 87, 87);
+    border: 0px solid rgb(87, 87, 87);
     background-color: #fff;
     border-radius: 50px;
     -webkit-box-shadow: 8px 8px 24px -18px rgba(0, 0, 0, 0.95);
@@ -192,18 +210,30 @@
     backdrop-filter: blur(12px);
   }
 }
+// @keyframes flow {
+//   0% {
+//     transform: translate(0%, 0%) scale(1) rotate(2deg);
+//   }
+
+//   30% {
+//     transform: translate(-2%, -2%) scale(1.1) rotate(-3deg);
+//   }
+//   60% {
+//     transform: translate(5%, -4%) scale(0.9) rotate(5deg);
+//   }
+//   100% {
+//     transform: translate(0%, 0%) scale(1) rotate(2deg);
+//   }
+// }
+
 @keyframes flow {
   0% {
-    transform: translate(0%, 0%) scale(1) rotate(2deg);
+    transform: rotate(0deg) scale(1);
   }
-
-  30% {
-    transform: translate(-2%, -2%) scale(1.1) rotate(-3deg);
-  }
-  60% {
-    transform: translate(5%, -4%) scale(0.9) rotate(5deg);
+  50% {
+    transform: rotate(180deg) scale(0.8);
   }
   100% {
-    transform: translate(0%, 0%) scale(1) rotate(2deg);
+    transform: rotate(360deg) scale(1);
   }
 }

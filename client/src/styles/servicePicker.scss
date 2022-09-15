@@ -1,11 +1,27 @@
 .reservation-form {
   display: flex;
   flex-direction: column;
+  padding: 145px 20px;
   > * {
     height: 60vh;
     display: flex;
     flex-direction: column;
     // justify-content: center;
+  }
+
+  div.place-data {
+    height: auto;
+
+    padding: 45px 120px;
+    border-radius: 40px !important;
+    justify-content: center;
+    border: 1px solid var(--green);
+    margin: auto;
+    row-gap: 5px;
+    font-size: 1.3rem;
+    > span {
+      font-size: 2rem;
+    }
   }
 
   > div > span,
