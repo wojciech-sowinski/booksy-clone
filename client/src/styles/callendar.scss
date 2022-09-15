@@ -29,6 +29,9 @@
     background-color: rgb(231, 156, 106) !important;
   }
   .fc-daygrid-day-events {
+    .fc-daygrid-event-harness {
+      background-color: #fff;
+    }
     .fc-event-main {
       color: #0a2e64 !important;
     }

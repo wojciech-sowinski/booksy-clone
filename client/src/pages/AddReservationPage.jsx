@@ -332,6 +332,36 @@ const ReservationPage = () => {
                     <span>Potwierdzenie otrzymasz na wskazany adres email.</span>
                 </p>
                 <p>
+                    <span>Dziękujemy za skorzystanie z naszych usług.</span>
+                </p>
+                <button onClick={() => { window.history.go(-1) }}>Wróć do poprzedniej strony</button>
+            </div>
+        )
+
+
+    }
+    const suspendInfo = () => {
+
+
+        return (
+            <div className='data-loader'>
+
+                <ProgressBar
+                    height="80"
+                    width="80"
+                    ariaLabel="progress-bar-loading"
+
+                    wrapperClass="progress-bar-wrapper"
+                    borderColor='red'
+                    barColor='red'
+                />
+                <p>
+                    <span> <strong>Aktualnie wybrany salon nie obsługuje rezerwacji.</strong> </span>
+                </p>
+                <p>
+                    <span>Przepraszamy za niedogodności.</span>
+                </p>
+                <p>
                     <span>Dziękujemy za skorzystanie z naszych usług!</span>
                 </p>
                 <button onClick={() => { window.history.go(-1) }}>Wróć do poprzedniej strony</button>
@@ -370,13 +400,14 @@ const ReservationPage = () => {
         <>
             <div className="reservation-form">
                 {activePlace && placeDataRender()}
-                {!reservationSend && activePlace && <AutoScrollOnMount scrollTo={'.service-picker'} >{servicePicker(activePlace)}</AutoScrollOnMount>}
-                {!reservationSend && optionsLoading && <DataLoader text={'Wczytuję katalog usług...'} />}
-                {!reservationSend && activeService && <AutoScrollOnMount scrollTo={'.date-picker'}><div> {datePicker()} </div></AutoScrollOnMount>}
-                {!reservationSend && activeDate && (<AutoScrollOnMount scrollTo={'.time-picker'} >{timePicker()}</AutoScrollOnMount>)}
-                {!reservationSend && termsLoading && <DataLoader text={'Wczytuję dostępne terminy...'} />}
+                {!placeData.suspend && !reservationSend && activePlace && <AutoScrollOnMount scrollTo={'.service-picker'} >{servicePicker(activePlace)}</AutoScrollOnMount>}
+                {!placeData.suspend && !reservationSend && optionsLoading && <DataLoader text={'Wczytuję katalog usług...'} />}
+                {!placeData.suspend && !reservationSend && activeService && <AutoScrollOnMount scrollTo={'.date-picker'}><div> {datePicker()} </div></AutoScrollOnMount>}
+                {!placeData.suspend && !reservationSend && activeDate && (<AutoScrollOnMount scrollTo={'.time-picker'} >{timePicker()}</AutoScrollOnMount>)}
+                {!placeData.suspend && !reservationSend && termsLoading && <DataLoader text={'Wczytuję dostępne terminy...'} />}
                 {(activeDate && activePlace && activeTerm) && <AutoScrollOnMount scrollTo={'.guest-data'}><div>{guestData()}</div></AutoScrollOnMount>}
-                {!reservationSend && reservationSending && <DataLoader text={reservationSendingInfo} />}
+                {!placeData.suspend && !reservationSend && reservationSending && <DataLoader text={reservationSendingInfo} />}
+                {placeData.suspend && suspendInfo()}
                 {reservationSend && reservationSendInfo()}
             </div></>
     );
