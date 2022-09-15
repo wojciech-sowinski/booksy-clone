@@ -1,13 +1,13 @@
 .fc {
-  color: var(--greenDark);
+  color: #0a2e64;
   * {
     z-index: 0 !important;
   }
   .fc-daygrid-day-number {
-    // background-color: var(--pink);
+    // background-color: rgb(231, 156, 106);
     margin: 5px;
     border-radius: 40px;
-    border: 1px solid var(--green);
+    border: 1px solid #4b81d3;
     width: 35px;
     aspect-ratio: 1/1;
     text-align: center;
@@ -16,28 +16,28 @@
   table {
     border: none !important;
     td {
-      border: 1px solid var(--green);
+      border: 1px solid #4b81d3;
       cursor: pointer;
     }
   }
   .fc-col-header-cell {
-    background-color: var(--green);
-    color: var(--lightGray);
+    background-color: #4b81d3;
+    color: rgb(255, 255, 255);
     border: none !important;
   }
   .fc-day-today {
-    background-color: var(--pink) !important;
+    background-color: rgb(231, 156, 106) !important;
   }
   .fc-daygrid-day-events {
     .fc-event-main {
-      color: var(--greenDark) !important;
+      color: #0a2e64 !important;
     }
     .fc-daygrid-event {
       display: flex;
       padding: 3px;
       flex-direction: column;
       align-items: flex-start;
-      border: 1px solid var(--green);
+      border: 1px solid #4b81d3;
       row-gap: 5px;
 
       .event-title {
@@ -49,8 +49,8 @@
       .event-time {
         padding: 3px 10px;
         width: 100%;
-        color: var(--lightGray);
-        background-color: var(--green);
+        color: rgb(255, 255, 255);
+        background-color: #4b81d3;
         display: flex;
         justify-content: space-between;
         svg {
@@ -77,15 +77,15 @@
         .event-delete-button {
           display: block;
           width: 100%;
-          color: var(--greenDark);
-          background-color: var(--pink);
+          color: #0a2e64;
+          background-color: rgb(231, 156, 106);
         }
 
         .event-time {
           svg {
             transition: 0.3s;
             transform: rotate(180deg);
-            color: var(--pink);
+            color: rgb(231, 156, 106);
           }
         }
       }

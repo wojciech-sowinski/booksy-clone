@@ -7,8 +7,8 @@ form.place-form {
   max-width: 600px;
   input {
     padding: 10px;
-    border: 1px solid var(--green);
-    background-color: var(--lightGray);
+    border: 1px solid #4b81d3;
+    background-color: rgb(255, 255, 255);
     font-size: 0.9rem;
     font-weight: 300;
   }
@@ -18,7 +18,7 @@ form.place-form {
   }
 
   label {
-    color: var(--greenDark);
+    color: #0a2e64;
     font-size: 0.8rem;
     font-weight: 300;
   }
@@ -29,7 +29,7 @@ form.place-form {
     justify-content: space-between;
     span {
       font-weight: 300;
-      color: var(--lightGray);
+      color: rgb(255, 255, 255);
     }
   }
 }

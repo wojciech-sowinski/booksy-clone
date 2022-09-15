@@ -1,6 +1,6 @@
 .configuration-page {
   padding-top: 100px;
-  background: linear-gradient(rgb(255, 255, 255), var(--base));
+  background: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255));
   min-height: calc(100vh - 60px);
 
   .api-links {
@@ -11,7 +11,7 @@
 
     font-size: 1.5rem;
     strong {
-      color: var(--greenDark);
+      color: #0a2e64;
       font-weight: 600;
     }
     a {
@@ -28,8 +28,8 @@
       position: relative;
       text-decoration: none;
       background-color: none;
-      background-color: var(--green);
-      color: var(--lightGray);
+      background-color: #4b81d3;
+      color: rgb(255, 255, 255);
 
       padding: 15px 40px;
       font-size: 0.9rem;
@@ -38,8 +38,8 @@
       transition: 0.3s;
 
       &.active {
-        color: var(--pink);
-        background-color: var(--greenDark);
+        color: rgb(231, 156, 106);
+        background-color: #0a2e64;
 
         transition: 0.3s;
       }
@@ -54,6 +54,6 @@
   .configuration-pages-wrapper {
     margin: 0 10px;
     padding: 10px;
-    // background-color: var(--greenDark);
+    // background-color: #0a2e64;
   }
 }

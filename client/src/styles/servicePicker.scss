@@ -15,29 +15,37 @@
     padding: 45px 120px;
     border-radius: 40px !important;
     justify-content: center;
-    border: 1px solid var(--green);
+    border: 1px solid #4b81d3;
     margin: auto;
-    row-gap: 5px;
+    row-gap: 15px;
     font-size: 1.3rem;
     > span {
       font-size: 2rem;
+    }
+    svg {
+      color: #3dbda5;
+    }
+    strong {
+      font-weight: 800;
+      font-size: 2rem;
+      color: #3dbda6;
     }
   }
 
   > div > span,
   .term-info {
     font-size: 1.5rem;
-    color: var(--green);
+    color: #4b81d3;
     .number {
       display: inline-block;
       margin: 10px;
       width: 80px;
       border-radius: 40px;
-      border: 2px solid var(--green);
+      border: 2px solid #4b81d3;
       text-align: center;
       font-size: 3rem;
       aspect-ratio: 1/1;
-      //   background-color: var(--green);
+      //   background-color: #4b81d3;
     }
   }
   //   padding: 30px;
@@ -45,7 +53,7 @@
   //   input {
   //     padding: 10px;
   //     border: none;
-  //     background-color: var(--lightGray);
+  //     background-color: rgb(255, 255, 255);
   //     font-size: 0.9rem;
   //     font-weight: 300;
   //   }
@@ -55,7 +63,7 @@
   //   }
 
   //   label {
-  //     color: var(--lightGray);
+  //     color: rgb(255, 255, 255);
   //     font-size: 0.8rem;
   //     font-weight: 300;
   //   }
@@ -66,7 +74,7 @@
   //     justify-content: space-between;
   //     span {
   //       font-weight: 300;
-  //       color: var(--lightGray);
+  //       color: rgb(255, 255, 255);
   //     }
   //   }
 }
@@ -79,7 +87,7 @@
     max-width: 600px;
     row-gap: 20px;
     input {
-      border: 1px solid var(--green);
+      border: 1px solid #4b81d3;
     }
     > div {
       display: flex;
@@ -89,7 +97,7 @@
       }
     }
     label {
-      color: var(--green);
+      color: #4b81d3;
     }
   }
   .react-dropdown-select {
@@ -98,16 +106,16 @@
     border-radius: 40px !important;
     flex-basis: 80% !important;
     min-width: 800px !important;
-    border: 1px solid var(--green);
+    border: 1px solid #4b81d3;
     height: 70px;
-    background-color: var(--lightGray);
+    background-color: rgb(255, 255, 255);
     flex-grow: 1;
     // overflow: hidden;
     .option-div {
       display: flex;
       flex-direction: column;
       padding: 5px 15px;
-      background-color: var(--lightGray);
+      background-color: rgb(255, 255, 255);
       .place-title {
         font-size: 1.2rem;
         font-weight: 400;
@@ -123,7 +131,7 @@ input {
   padding: 10px;
   margin: 5px;
   border: none;
-  background-color: var(--lightGray);
+  background-color: rgb(255, 255, 255);
   font-size: 0.9rem;
   font-weight: 300;
 }
@@ -164,23 +172,23 @@ input[type="checkbox"] {
     margin: 5px;
     width: 90px;
     padding: 5px;
-    background-color: var(--lightGray);
+    background-color: rgb(255, 255, 255);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    border: 1px solid var(--green);
+    border: 1px solid #4b81d3;
     cursor: pointer;
     .date-picker-day {
       font-size: 2rem;
       font-weight: 600;
-      color: var(--green);
+      color: #4b81d3;
     }
     .time-picker-time {
       font-size: 1.2rem;
       font-weight: 600;
-      color: var(--green);
+      color: #4b81d3;
       letter-spacing: -1px;
     }
     .date-picker-day-of-week,
@@ -189,10 +197,10 @@ input[type="checkbox"] {
       font-weight: 300;
     }
     &:hover {
-      background-color: var(--pink);
+      background-color: rgb(231, 156, 106);
     }
     &.active {
-      background-color: var(--pink);
+      background-color: rgb(231, 156, 106);
     }
   }
 }

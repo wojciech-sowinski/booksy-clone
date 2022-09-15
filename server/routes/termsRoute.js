@@ -11,9 +11,6 @@ const ObjectId = require('mongodb').ObjectID
 
 const checkTermCollides = async (dayOfWeek,placeId,serviceId,serviceStart,serviceEnd,serviceDate)=>{
 
-    console.log('check term colide',dayOfWeek,placeId,serviceId,serviceStart,serviceEnd,serviceDate);
-    
-
     try {
         //dane usługi
         const service = await Service.findOne({$and:[{_id:serviceId},{placeId}]})    
@@ -94,7 +91,7 @@ router.post('/bookit',async (req,res)=>{
     const check =await checkTermCollides(dayOfWeek,placeId,serviceId,serviceStart,serviceEnd,serviceDate)
 
 if (check.result) {
-    console.log('dodajemy');    
+     
     const reservation = new Reservation({dayOfWeek,placeId,serviceId,serviceStart,serviceEnd,serviceDate,clientFirstName,clientLastName,email})
     reservation.save((err,data)=>{
         if(err){
@@ -105,8 +102,6 @@ if (check.result) {
         }
     })
 }else{
-    console.log('odrzucamy');
-    
     res.json({success:false,result:'not available'}) 
 }
 })
@@ -115,45 +110,30 @@ if (check.result) {
 router.get('/terms',async (req,res)=>{
     const freeTerms = []
     const {activePlace,activeService,date,dayOfWeek} = req.query  
-    
-    console.log('sprawdzamy dostepne terminy');
-    
-
-   try {
-        const service = await Service.findOne({$and:[{_id:activeService},{placeId:activePlace}]})
-        
 
     try {
+        const service = await Service.findOne({$and:[{_id:activeService},{placeId:activePlace}]})
+    try {
         const timeFrames = await TimeFrame.find({$and:[{placeId:activePlace},{dayIndex:dayOfWeek}]})
-        
         for(timeFrame of timeFrames){
-           
             const serviceDuration=service.duration
             const timeFrameStart = timeFrame.start
             const timeFrameEnd = timeFrame.end
-
             let serviceFrameStart = timeFrameStart
             let serviceFrameEnd = timeFrameStart + serviceDuration
            
            while(serviceFrameEnd<=timeFrameEnd){
 
             const check =await checkTermCollides(dayOfWeek,activePlace,activeService,serviceFrameStart,serviceFrameEnd,date)
-            console.log(serviceFrameStart,serviceFrameEnd,check);
             
             if(check.result){
-
                 freeTerms.push({start:serviceFrameStart,end:serviceFrameEnd})
                 serviceFrameStart = serviceFrameEnd
                 serviceFrameEnd = serviceFrameEnd + serviceDuration   
             }else{
-                console.log('zmiana ramy');
-                
                 serviceFrameStart = check.endOfReservations ? check.endOfReservations: serviceFrameEnd
                 serviceFrameEnd = (check.endOfReservations ? check.endOfReservations: serviceFrameEnd) + serviceDuration   
             }
-
-                      
-            
            }      
         }
     } catch (error) {
@@ -195,7 +175,6 @@ router.get('/reservations',verifyJWT,async (req,res)=>{
 router.delete("/reservations", verifyJWT, (req, res) => {
     
     console.log(ObjectId(req.body.reservationId));
-    
     const _id = new ObjectId(req.body.reservationId)
   
     Reservation.findOneAndDelete({_id},(err,data)=>{
@@ -204,8 +183,6 @@ router.delete("/reservations", verifyJWT, (req, res) => {
         res.json({success:false,result:'delete failed'})
         
     }else{
-        console.log(data);
-        
         if(data){
             res.json({success:true,result:'servise deleted'})
         }else{

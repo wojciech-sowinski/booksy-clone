@@ -7,8 +7,12 @@ import AutoScrollOnMount from "../components/AutoScrollOnMount";
 import DataLoader from "../components/DataLoader";
 import axios from "axios";
 import config from "../config";
-// import { useNavigate } from "react-router-dom";
+import { BallTriangle, ProgressBar } from 'react-loader-spinner'
+import '../styles/DataLoader.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faLocationDot, faAt, faPhoneVolume
+} from "@fortawesome/free-solid-svg-icons";
 const ReservationPage = () => {
 
     const daysOfWeek = [
@@ -35,6 +39,8 @@ const ReservationPage = () => {
     const [optionsLoading, setOptionsLoading] = useState(false)
     const [reservationSending, setReservationSending] = useState(false)
     const [reservationSendingInfo, setReservationSendingInfo] = useState('Wysyłam rezerwację')
+    const [reservationSend, setReservationSend] = useState(false)
+
 
     const [placeData, setPlaceData] = useState({})
 
@@ -63,7 +69,6 @@ const ReservationPage = () => {
         })
             .then(resolve => {
                 if (resolve.data.result) {
-
                     const fetchedServices = resolve.data.services.map(service => {
                         return {
                             ...service, label: `${service.name}`, value: service._id
@@ -92,12 +97,7 @@ const ReservationPage = () => {
             dayOfWeek: activeDate.dayOfWeek
         }).then(resolve => {
             if (resolve.data.success) {
-                setReservationSendingInfo('Rezerwacja wysłana')
-                setTimeout(() => {
-                    setReservationSending(false)
-                    setReservationSendingInfo('Wysyłam rezerwację')
-                    // navigate('../')
-                }, 1000);
+                setReservationSend(true)
             }
         })
     }
@@ -287,28 +287,58 @@ const ReservationPage = () => {
             <div className="place-data">
                 <span>Dokonujesz rezerwacji w:</span>
                 <div>
-                    <span>{placeData.name}</span>
+                    <span> <strong>{placeData.name}</strong></span>
                 </div>
                 <div>
-                    <span>{placeData.street} </span>
-                    <span>{placeData.houseNumber}</span>
-                </div>
-                <div>
+                    <span> <FontAwesomeIcon icon={faLocationDot} /> {placeData.street} </span>
+                    <span>{placeData.houseNumber}, </span>
                     <span>{placeData.postalCode} </span>
                     <span>{placeData.city} </span>
                 </div>
+
                 <div>
-                    <span>{placeData.email} </span>
+                    <span> <FontAwesomeIcon icon={faAt} /> {placeData.email} </span>
 
                 </div>
                 <div>
-                    <span>{placeData.phone} </span>
+                    <span> <FontAwesomeIcon icon={faPhoneVolume} /> {placeData.phone} </span>
 
                 </div>
             </div>
 
 
         )
+    }
+
+    const reservationSendInfo = () => {
+
+
+        return (
+            <div className='data-loader'>
+
+                <ProgressBar
+                    height="80"
+                    width="80"
+                    ariaLabel="progress-bar-loading"
+
+                    wrapperClass="progress-bar-wrapper"
+                    borderColor='#e79c6a'
+                    barColor='#3dbda5'
+                />
+                <p>
+                    <span> <strong>Twoja rezerwacja została wysłana.</strong> </span>
+                </p>
+                <p>
+                    <span>Potwierdzenie otrzymasz na wskazany adres email.</span>
+                </p>
+                <p>
+                    <span>Dziękujemy za skorzystanie z naszych usług!</span>
+                </p>
+                <button onClick={() => { window.history.go(-1) }}>Wróć do poprzedniej strony</button>
+            </div>
+        )
+
+
     }
 
     useEffect(() => {
@@ -334,19 +364,20 @@ const ReservationPage = () => {
 
         }
 
-    }, [activePlace])
+    }, [activePlace, reservationSend])
 
     return (
         <>
             <div className="reservation-form">
                 {activePlace && placeDataRender()}
-                {activePlace && <AutoScrollOnMount scrollTo={'.service-picker'} >{servicePicker(activePlace)}</AutoScrollOnMount>}
-                {optionsLoading && <DataLoader text={'Wczytuję katalog usług...'} />}
-                {activeService && <AutoScrollOnMount scrollTo={'.date-picker'}><div> {datePicker()} </div></AutoScrollOnMount>}
-                {activeDate && (<AutoScrollOnMount scrollTo={'.time-picker'} >{timePicker()}</AutoScrollOnMount>)}
-                {termsLoading && <DataLoader text={'Wczytuję dostępne terminy...'} />}
+                {!reservationSend && activePlace && <AutoScrollOnMount scrollTo={'.service-picker'} >{servicePicker(activePlace)}</AutoScrollOnMount>}
+                {!reservationSend && optionsLoading && <DataLoader text={'Wczytuję katalog usług...'} />}
+                {!reservationSend && activeService && <AutoScrollOnMount scrollTo={'.date-picker'}><div> {datePicker()} </div></AutoScrollOnMount>}
+                {!reservationSend && activeDate && (<AutoScrollOnMount scrollTo={'.time-picker'} >{timePicker()}</AutoScrollOnMount>)}
+                {!reservationSend && termsLoading && <DataLoader text={'Wczytuję dostępne terminy...'} />}
                 {(activeDate && activePlace && activeTerm) && <AutoScrollOnMount scrollTo={'.guest-data'}><div>{guestData()}</div></AutoScrollOnMount>}
-                {reservationSending && <DataLoader text={reservationSendingInfo} />}
+                {!reservationSend && reservationSending && <DataLoader text={reservationSendingInfo} />}
+                {reservationSend && reservationSendInfo()}
             </div></>
     );
 }

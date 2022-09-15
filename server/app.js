@@ -26,7 +26,7 @@ const servicesRoute = require("./routes/servicesRoute");
 const termsRoute = require('./routes/termsRoute')
 
 app.get("/", (req, res) => {
-  res.send("server is listening in port 5000");
+  res.send("server is listening");
 });
 
 app.use("/", cors(), userRoute);

@@ -13,15 +13,15 @@
     flex-direction: column;
     row-gap: 30px;
     padding: 30px;
-    background-color: var(--green);
+    background-color: #4b81d3;
     span {
       font-weight: 500;
-      color: var(--lightGray);
+      color: rgb(255, 255, 255);
     }
     input {
       padding: 10px;
       border: none;
-      background-color: var(--lightGray);
+      background-color: rgb(255, 255, 255);
       font-size: 0.9rem;
       font-weight: 600;
     }
@@ -32,12 +32,12 @@
       cursor: pointer;
       svg {
         float: right;
-        color: var(--lightGray);
+        color: rgb(255, 255, 255);
       }
     }
     button {
-      background-color: var(--pink);
-      color: var(--purpleDark);
+      background-color: rgb(231, 156, 106);
+      color: #2e151b;
     }
   }
 }

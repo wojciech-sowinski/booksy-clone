@@ -25,7 +25,7 @@
     "react-confirm-btn": "^1.1.1",
     "react-dom": "^18.2.0",
     "react-dropdown-select": "^4.9.0",
-    "react-loader-spinner": "^5.1.7-beta.1",
+    "react-loader-spinner": "^5.3.4",
     "react-password-strength-bar": "^0.4.1",
     "react-redux": "^8.0.2",
     "react-router": "^6.3.0",

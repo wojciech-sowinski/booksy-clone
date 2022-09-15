@@ -78,7 +78,6 @@ router.post("/frames", verifyJWT, (req, res) => {
 
 router.get("/frames", verifyJWT, (req, res) => {
   const { userId } = req;
-
   TimeFrame.find({ userId }, { userId: 0 }, (err, data) => {
     if (err) {
       console.log("find frames failed");

@@ -4,7 +4,7 @@
     li {
       padding: 20px 0px 30px 30px;
       margin: 10px auto;
-      border: 2px solid var(--green);
+      border: 2px solid #4b81d3;
       max-width: 800px;
       justify-content: space-between;
       display: flex;
@@ -16,31 +16,31 @@
       .service-title {
         font-size: 1.4rem;
         font-weight: 100;
-        color: var(--greenDark);
+        color: #0a2e64;
       }
       .service-properties {
         display: flex;
         column-gap: 20px;
-        background-color: var(--pink);
-        color: var(--greenDark);
+        background-color: rgb(231, 156, 106);
+        color: #0a2e64;
         padding: 5px 20px;
         margin-left: -32px;
       }
       .service-description {
         padding: 10px;
-        color: var(--green);
+        color: #4b81d3;
       }
       &.suspend {
         background-color: rgb(156, 58, 58);
         .service-suspend-info {
-          color: var(--lightGray);
+          color: rgb(255, 255, 255);
           font-size: 1.1rem;
         }
       }
       .service-buttons {
         button {
           padding: 15px;
-          color: var(--green);
+          color: #4b81d3;
           text-align: center;
           aspect-ratio: 1/1;
           background-color: rgba(0, 0, 0, 0);

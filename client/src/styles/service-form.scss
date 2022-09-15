@@ -25,7 +25,7 @@ form.service-form {
   input {
     padding: 10px;
     border: none;
-    background-color: var(--lightGray);
+    background-color: rgb(255, 255, 255);
     font-size: 0.9rem;
     font-weight: 300;
   }
@@ -39,7 +39,7 @@ form.service-form {
     border: none;
     font-size: 0.9rem;
     font-weight: 300;
-    background-color: var(--lightGray);
+    background-color: rgb(255, 255, 255);
     &::placeholder {
       font-size: 0.9rem;
       font-weight: 300;
@@ -47,7 +47,7 @@ form.service-form {
   }
 
   label {
-    color: var(--lightGray);
+    color: rgb(255, 255, 255);
     font-size: 0.8rem;
     font-weight: 300;
   }
@@ -59,7 +59,7 @@ form.service-form {
     span {
       font-size: 0.8rem;
       font-weight: 300;
-      color: var(--lightGray);
+      color: rgb(255, 255, 255);
     }
   }
 }

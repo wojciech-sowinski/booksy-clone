@@ -48,7 +48,7 @@
     }
     .Typewriter {
       .Typewriter__cursor {
-        color: var(--pink);
+        color: rgb(231, 156, 106);
       }
     }
 
@@ -74,7 +74,7 @@
 
       &.orange {
         background-color: #fff;
-        // background-color: var(--pink);
+        // background-color: rgb(231, 156, 106);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-image: url("../media/polygons-aplha.png");
@@ -83,7 +83,7 @@
       }
       &.blue {
         background-color: #fff;
-        // background-color: var(--green);
+        // background-color: #4b81d3;
         color: #000;
         background-image: url("../media/polygons-aplha.png");
         background-repeat: no-repeat;

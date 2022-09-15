@@ -8,7 +8,7 @@
   input {
     padding: 10px;
     border: none;
-    background-color: var(--lightGray);
+    background-color: rgb(255, 255, 255);
     font-size: 0.9rem;
     font-weight: 300;
   }
@@ -16,7 +16,7 @@
     text-align: center;
     span {
       font-weight: 500;
-      color: var(--lightGray);
+      color: rgb(255, 255, 255);
     }
   }
   .password-strenght-bar {
@@ -25,7 +25,7 @@
       text-align: center !important;
       font-weight: 500;
       font-size: 0.7rem !important;
-      color: var(--lightGray) !important;
+      color: rgb(255, 255, 255) !important;
     }
   }
 }
