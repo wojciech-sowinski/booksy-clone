@@ -114,8 +114,8 @@ const ReservationPage = () => {
                     <input value={guestEmail} onChange={(e) => setGuestEmail(e.currentTarget.value)} type="email" name="email" placeholder="Adres Email" required />
                 </div>
                 <div>
-                    <input checked={guestConsent} onChange={(e) => setGuestConsent(e.currentTarget.checked)} type="checkbox" name="consent" id="consent-check" required />
-                    <label htmlFor="consent-check"> Oświadczam, że zapoznałem się z regulaminem oraz wyrażam zgodę na użycie moich danych w celu przetwarzania rezerwacji.</label>
+
+                    <label htmlFor="consent-check"><input checked={guestConsent} onChange={(e) => setGuestConsent(e.currentTarget.checked)} type="checkbox" name="consent" id="consent-check" required /> Oświadczam, że zapoznałem się z regulaminem oraz wyrażam zgodę na użycie moich danych w celu przetwarzania rezerwacji.</label>
                 </div>
                 <div>
                     <button type="submit">Rezerwuj</button>

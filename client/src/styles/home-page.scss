@@ -30,38 +30,45 @@
       animation: blurIn 12s;
     }
   }
-  .typing-span {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 40px;
-    width: 80%;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #fff;
-    font-size: 4rem;
-    font-weight: 100 !important;
-    transform: 0.3s;
-    strong {
-      font-weight: 500;
-    }
-    .Typewriter {
-      .Typewriter__cursor {
-        color: rgb(231, 156, 106);
-      }
-    }
 
-    @media screen and (max-width: 768px) {
-      font-size: 2.5rem;
-      img {
-        max-width: 400px;
+  .typing-span-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    .typing-span {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      row-gap: 40px;
+      width: 80%;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #fff;
+      font-size: 4rem;
+      font-weight: 100 !important;
+      transform: 0.3s;
+      strong {
+        font-weight: 500;
       }
-    }
-    @media screen and (max-width: 480px) {
-      font-size: 1.7rem;
-      img {
-        max-width: 250px;
+      .Typewriter {
+        .Typewriter__cursor {
+          color: rgb(231, 156, 106);
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        font-size: 2.5rem;
+        img {
+          max-width: 400px;
+        }
+      }
+      @media screen and (max-width: 480px) {
+        font-size: 1.7rem;
+        img {
+          max-width: 250px;
+        }
       }
     }
   }
@@ -71,14 +78,16 @@
       display: flex;
       z-index: 13;
       padding: 100px 20px;
+      align-items: center;
 
       &.orange {
         background-color: #fff;
         // background-color: rgb(231, 156, 106);
         background-repeat: no-repeat;
         background-attachment: fixed;
+        background-size: cover;
         background-image: url("../media/polygons-aplha.png");
-        background-size: 100%;
+
         color: #000;
       }
       &.blue {
@@ -89,6 +98,7 @@
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-size: 100%;
+        background-size: cover;
       }
 
       p {
@@ -145,6 +155,8 @@
   }
 
   .places-splide-div {
+    max-height: 100vh;
+    aspect-ratio: 1/1;
     border: 0px solid rgb(87, 87, 87);
     background-color: #fff;
     border-radius: 50px;
@@ -153,7 +165,7 @@
     box-shadow: 8px 8px 24px -18px rgba(0, 0, 0, 0.95);
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
     main {
       section {
         padding: 10px;
@@ -161,9 +173,10 @@
         > * {
           width: 90%;
         }
-        div.dark {
+        div {
+          width: 100%;
           p {
-            font-size: 1.3rem;
+            font-size: 1rem;
             strong {
               font-size: 2rem;
               margin: 30px 0;

@@ -18,7 +18,7 @@ const LoginButton = () => {
 
   return (
     <button className="login-button" onClick={onClickHandle}>
-      {auth ? "Wyloguj" : "Zaloguj"}
+      {auth ? "Wyloguj" : "Zaloguj | Zarejestruj"}
     </button>
   );
 };

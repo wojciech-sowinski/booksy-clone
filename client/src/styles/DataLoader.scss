@@ -15,9 +15,11 @@
   row-gap: 20px;
   z-index: 10;
   animation: fadeIn 0.5s ease 0s 1 normal forwards;
-  span {
+  span,
+  p {
     color: #4b81d3;
     font-size: 1.3rem !important;
+    text-align: center;
   }
   strong {
     font-weight: 600;
@@ -31,5 +33,13 @@
 
   100% {
     opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .data-loader {
+    span {
+      font-size: 1rem !important;
+    }
   }
 }
