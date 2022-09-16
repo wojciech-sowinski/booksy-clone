@@ -82,6 +82,7 @@
           width: 100%;
           color: #0a2e64;
           background-color: rgb(231, 156, 106);
+          padding: 5px;
         }
 
         .event-time {
@@ -91,6 +92,22 @@
             color: rgb(231, 156, 106);
           }
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .fc {
+    .fc-daygrid-event {
+      font-size: 0.7rem;
+
+      span {
+        font-size: 0.4rem !important;
+      }
+      button {
+        font-size: 0.4rem !important;
+        padding: 3px;
       }
     }
   }

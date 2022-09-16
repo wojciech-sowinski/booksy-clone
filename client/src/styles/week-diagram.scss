@@ -3,6 +3,9 @@
   display: flex;
   flex-direction: column;
   row-gap: 1px;
+  button {
+    padding: 5px;
+  }
   > span {
     color: #0a2e64;
     padding: 30px;
@@ -24,7 +27,7 @@
       justify-content: center;
       align-items: center;
       padding: 5px;
-      font-size: 0.8rem;
+      font-size: 0.6rem;
     }
     .day-hours {
       position: relative;
@@ -67,6 +70,19 @@
           transition: 0.3s;
           cursor: pointer;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .week-diagram {
+    button {
+      padding: 5px;
+    }
+    .day {
+      .day-label {
+        font-size: 0.4rem;
       }
     }
   }

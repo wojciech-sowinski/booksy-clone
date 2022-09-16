@@ -59,7 +59,7 @@
       background-color: #4b81d3;
       color: rgb(255, 255, 255);
 
-      padding: 15px 40px;
+      padding: 5px 20px;
       font-size: 0.9rem;
       cursor: pointer;
       text-transform: uppercase;
@@ -83,5 +83,16 @@
     margin: 0 10px;
     padding: 10px;
     // background-color: #0a2e64;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .configuration-page {
+    nav.configuration-nav {
+      a {
+        padding: 5px 10px;
+        font-size: 0.7rem;
+      }
+    }
   }
 }

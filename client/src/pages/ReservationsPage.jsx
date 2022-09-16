@@ -52,7 +52,8 @@ const ReservationsPage = ({ activePlace }) => {
       <>
         <span onClick={openEventHandle} className='event-time'>{`${startTime} - ${endTime}`} <span><FontAwesomeIcon icon={faCaretDown} /></span></span>
         <span className='event-title'>{eventInfo.event.title}</span >
-        <span className='event-client'>{`${eventInfo.event.extendedProps.clientFirstName} ${eventInfo.event.extendedProps.clientLastName} (${eventInfo.event.extendedProps.email})`}</span >
+        <span className='event-client'>{`${eventInfo.event.extendedProps.clientFirstName} ${eventInfo.event.extendedProps.clientLastName}`}</span >
+        <span className='event-client'>{`${eventInfo.event.extendedProps.email}`}</span >
         <ConfirmBtn className={'event-delete-button'} onConfirm={() => { eventDeleteHandle(eventInfo.event.extendedProps._id) }} time={5000} confirmText={'Potwierdź'}  > Anuluj rezerwację </ConfirmBtn>
       </>
     )
