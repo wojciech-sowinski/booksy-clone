@@ -280,7 +280,6 @@ const ReservationPage = () => {
         </div>)
     }
 
-
     const placeDataRender = () => {
         return (
 
@@ -312,10 +311,8 @@ const ReservationPage = () => {
 
     const reservationSendInfo = () => {
 
-
         return (
             <div className='data-loader'>
-
                 <ProgressBar
                     height="80"
                     width="80"

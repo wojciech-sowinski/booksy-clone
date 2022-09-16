@@ -21,7 +21,8 @@ import {
   faBusinessTime,
   faReceipt,
   faStar,
-  faWrench
+  faWrench,
+  faMobileScreenButton
 } from "@fortawesome/free-solid-svg-icons";
 
 const ConfigurationPage = () => {
@@ -29,18 +30,55 @@ const ConfigurationPage = () => {
   const [addNewPlace, setAddNewPlace] = useState(false);
   const { loading, places } = useSelector((state) => state.placesReducer);
   const { auth, userData } = useSelector((state) => state.userDataReducer);
+  const [orientationHor, setOrientationHor] = useState(true);
+
 
   const dispatch = useDispatch();
 
+
+  const horizontalCheck = () => {
+
+    if ((window.innerHeight > window.innerWidth) && (window.innerWidth < 768)) {
+
+      setOrientationHor(true)
+    } else {
+      setOrientationHor(false)
+    }
+
+  }
+
+
+  const horizontalInfo = () => {
+
+    return (
+      <div className='data-loader horizontal-info'>
+        <FontAwesomeIcon icon={faMobileScreenButton} />
+        <span>Obróć urządzenie</span>
+      </div>
+    )
+
+  }
 
   useEffect(() => {
     dispatch(fetchPlaces());
     fetchServices(dispatch)
     dispatch(fetchTimeFrames())
+
+    horizontalCheck()
+
+    window.addEventListener('orientationchange', horizontalCheck)
+    window.addEventListener('resize', horizontalCheck)
+
+    return () => {
+      window.removeEventListener('resize', horizontalCheck)
+      window.removeEventListener('orientationchange', horizontalCheck)
+    }
+
   }, [activePlace, auth, userData]);
 
   return (
     <div className="configuration-page">
+      {orientationHor && horizontalInfo()}
       <main>
         <PlacePicker
           setActivePlace={setActivePlace}
@@ -72,7 +110,6 @@ const ConfigurationPage = () => {
                 <span> usługi</span>
               </NavLink>
               <NavLink to={`./apikeys`}>
-
                 <FontAwesomeIcon icon={faWrench} />
                 <span> API & Links</span>
               </NavLink>
@@ -110,7 +147,6 @@ const ConfigurationPage = () => {
                   path="/apikeys"
                   element={<ApiKeysPage activePlace={activePlace} />}
                 />
-
               </Routes>
             </div>
           </>

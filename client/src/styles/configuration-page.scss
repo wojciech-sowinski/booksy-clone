@@ -3,6 +3,34 @@
   background: linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255));
   min-height: calc(100vh - 60px);
 
+  .data-loader.horizontal-info {
+    svg {
+      color: #4b81d3;
+      font-size: 4rem;
+      animation: colapse 3s infinite;
+    }
+  }
+
+  @keyframes colapse {
+    0% {
+      transform: rotate(0deg);
+      color: #ff0000;
+    }
+
+    60% {
+      transform: rotate(90deg);
+      color: #48c50d;
+    }
+    90% {
+      transform: rotate(90deg);
+      color: #48c50d;
+    }
+    100% {
+      transform: rotate(0deg);
+      color: #ff0000;
+    }
+  }
+
   .api-links {
     display: flex;
     flex-direction: column;
