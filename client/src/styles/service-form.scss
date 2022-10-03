@@ -1,30 +1,31 @@
 form.service-form {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  // position: fixed;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
   margin: auto;
   display: flex;
   flex-direction: column;
   row-gap: 30px;
   padding: 30px;
   max-width: 600px;
-  .overlay {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgb(46, 68, 85, 0.6);
-    backdrop-filter: blur(10px);
-  }
+  // .overlay {
+  //   width: 100%;
+  //   height: 100%;
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   background-color: rgb(46, 68, 85, 0.6);
+  //   backdrop-filter: blur(10px);
+  // }
   svg {
     color: rgb(192, 149, 55);
     font-size: 2rem;
   }
-  input {
+  input,
+  textarea {
     padding: 10px;
-    border: none;
+    border: 1px solid #4b81d3;
     background-color: rgb(255, 255, 255);
     font-size: 0.9rem;
     font-weight: 300;
@@ -35,11 +36,6 @@ form.service-form {
   }
 
   textarea {
-    padding: 10px;
-    border: none;
-    font-size: 0.9rem;
-    font-weight: 300;
-    background-color: rgb(255, 255, 255);
     &::placeholder {
       font-size: 0.9rem;
       font-weight: 300;
@@ -47,7 +43,7 @@ form.service-form {
   }
 
   label {
-    color: rgb(255, 255, 255);
+    color: #0a2e64;
     font-size: 0.8rem;
     font-weight: 300;
   }
@@ -59,7 +55,7 @@ form.service-form {
     span {
       font-size: 0.8rem;
       font-weight: 300;
-      color: rgb(255, 255, 255);
+      color: #0a2e64;
     }
   }
 }

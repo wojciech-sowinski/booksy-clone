@@ -117,7 +117,7 @@ const ReservationsPage = ({ activePlace }) => {
       <main>
         <div className='button-bar'>
           <div>
-            <NavLink className={'add-reservation-button'} to="./reservation">
+            <NavLink className={'add-reservation-button'} to={`../../addreservation?place=${activePlace}`}>
               <span><FontAwesomeIcon icon={faPlus} />  Dodaj rezerwacje</span>
             </NavLink>
           </div>

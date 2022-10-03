@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerNewUser } from "../actions/userActions";
 import PasswordStrengthBar from 'react-password-strength-bar';
+import DataLoader from '../components/DataLoader'
 
 const RegistrationForm = () => {
   const [email, setEmail] = useState("");
@@ -11,37 +12,51 @@ const RegistrationForm = () => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [registrationInfo, setRegistrationInfo] = useState("");
   const [passwordStrength, setPasswordStrength] = useState(0)
+  const [showLoader, setShowLoader] = useState(false)
+  const [loaderText, setLoaderText] = useState('')
 
   const dispatch = useDispatch();
   const { response, loading } = useSelector((state) => state.userDataReducer);
 
+
+  // 
+
   const submitHandle = (e) => {
-    console.log('sub');
+
     e.preventDefault();
+
     if (password !== passwordConfirm) {
       setRegistrationInfo("Hasło i potwierdzenie hasła muszą być takie same.");
       setTimeout(() => {
         setRegistrationInfo("");
       }, 3000);
     } else {
+      setShowLoader(true)
+      setLoaderText('Trwa zakładanie profilu')
       registerNewUser({ email, password }, dispatch).then((resolve) => {
         console.log('rewsolve', resolve);
         if (resolve === "user exists") {
+          setShowLoader(false)
+
           setRegistrationInfo("Użytkownik o podanym EMAIL już istnieje.");
         } else if (resolve === "password to short") {
+          setShowLoader(false)
+
           setRegistrationInfo("Hasło jest zbyt krótkie");
           setTimeout(() => {
             setRegistrationInfo("");
           }, 3000);
         }
         else if (resolve === "user created") {
-          setRegistrationInfo(
-            "Profil użytkownika został utworzony. Zaloguj się."
-          );
+
+          setLoaderText("Profil użytkownika został utworzony. Zaloguj się.")
+
           setEmail("");
           setPassword("");
           setPasswordConfirm("");
           setTimeout(() => {
+            setShowLoader(false)
+            setLoaderText("")
             setRegistrationInfo("");
             dispatch({ type: "showModal", payload: "LoginForm" });
           }, 3000);
@@ -55,7 +70,8 @@ const RegistrationForm = () => {
 
   useEffect(() => { }, [response]);
 
-  return (
+  return (<>
+    {showLoader && < DataLoader text={loaderText} />}
     <form onSubmit={submitHandle} className="registration-form">
       <div>
         <span>Utwórz nowy profil</span>
@@ -95,6 +111,7 @@ const RegistrationForm = () => {
         </div>
       )}
     </form>
+  </>
   );
 };
 

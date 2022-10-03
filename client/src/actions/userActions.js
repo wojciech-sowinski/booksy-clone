@@ -89,20 +89,20 @@ export const loginUser = (loginData, dispatch) => {
     });
 };
 
-export const addPlace = (formData) => async (dispatch) => {
+export const addPlace = async (formData,dispatch) => {
   dispatch({
     type: "fetchPlaces",
     loading: true,
   });
-  await axios
-    .post(
-      config.serverUrl + "places",
-      { ...formData },
-      {
-        headers: {
-          "x-access-token": localStorage.getItem(config.authTokenName),
-        },
-      }
+  return await axios
+  .post(
+    config.serverUrl + "places",
+    { ...formData },
+    {
+      headers: {
+        "x-access-token": localStorage.getItem(config.authTokenName),
+      },
+    }
     )
     .then((resolve) => {
       if (resolve.data.success) {
@@ -110,11 +110,13 @@ export const addPlace = (formData) => async (dispatch) => {
           type: "fetchPlaces",
           payload: { places: resolve.data.places, loading: false },
         });
+       return resolve.data.success
       } else {
         dispatch({
           type: "fetchPlaces",
           payload: { places: resolve.data.places, loading: false },
         });
+        return resolve.data.success
       }
     });
 };
@@ -132,9 +134,9 @@ export const fetchPlaces = () => async (dispatch) => {
       });
     });
 };
-export const updatePlace = (formData) => async (dispatch) => {
+export const updatePlace = async (formData,dispatch) => {
   dispatch({ type: "fetchPlaces", payload: { loading: true } });
-  await axios
+  return await axios
     .put(
       config.serverUrl + "places",
       { ...formData },
@@ -149,21 +151,24 @@ export const updatePlace = (formData) => async (dispatch) => {
         type: "fetchPlaces",
         payload: { places: resolve.data.places, loading: false },
       });
+      return resolve
     });
 };
-export const deletePlace = (formData) => async (dispatch) => {
-  await axios
-    .delete(config.serverUrl + "places", {
-      headers: { "x-access-token": localStorage.getItem(config.authTokenName) },
-      data: {
-        ...formData,
-      },
-    })
-    .then((resolve) => {
+export const deletePlace =async (formData,dispatch)  => {
+  return await axios
+  .delete(config.serverUrl + "places", {
+    headers: { "x-access-token": localStorage.getItem(config.authTokenName) },
+    data: {
+      ...formData,
+    },
+  })
+  .then((resolve) => {
+      
       dispatch({
         type: "fetchPlaces",
         payload: { places: resolve.data.places },
       });
+      return resolve
     });
 };
 

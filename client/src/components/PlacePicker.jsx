@@ -51,7 +51,9 @@ const PlacePicker = ({ setActivePlace, setAddNewPlace }) => {
       <div><Select
         separator
         placeholder='wybierz miejsce...'
-        clearable
+        // clearable
+        searchable={false}
+        dropdownPosition='auto'
         options={options}
         noDataRenderer={() => 'Brak miejsc. Dodaj nowe.'}
         onChange={(values) => setActivePlace(values[0]?._id)}

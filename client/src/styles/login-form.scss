@@ -2,7 +2,7 @@
   margin: auto;
   display: flex;
   flex-direction: column;
-  row-gap: 30px;
+  row-gap: 20px;
   padding: 30px;
   max-width: 600px;
   input {
@@ -17,6 +17,17 @@
     span {
       font-weight: 500;
       color: rgb(255, 255, 255);
+    }
+  }
+
+  @media screen and (max-width: 1023px) and (orientation: landscape) {
+    row-gap: 5px;
+    input {
+      padding: 10px;
+      border: none;
+      background-color: rgb(255, 255, 255);
+      font-size: 0.9rem;
+      font-weight: 300;
     }
   }
 }

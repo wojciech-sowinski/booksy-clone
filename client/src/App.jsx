@@ -38,7 +38,7 @@ function App() {
     <Router>
       <div className="App">
         {show && <FormModal />}
-        <MainNav />
+        {<MainNav />}
         <div>
           <Routes>
             <Route path="/" element={<HomePage />} />

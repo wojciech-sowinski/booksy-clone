@@ -1,6 +1,7 @@
 .main-nav {
   position: absolute;
   width: 100%;
+
   top: 0;
   left: 0;
   display: flex;
@@ -12,9 +13,15 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 20px;
+  path {
+    fill: #fff;
+  }
   &.dark {
     a {
       color: #0a2e64;
+    }
+    path {
+      fill: #0a2e64;
     }
   }
 
@@ -42,6 +49,7 @@
   }
 
   @media screen and (max-width: 1023px) {
+    height: 60px;
     justify-content: space-between;
     align-items: center;
     padding: 0px 30px;
@@ -76,7 +84,7 @@
     }
   }
 
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 1023px) {
     img {
       max-height: 30px;
     }

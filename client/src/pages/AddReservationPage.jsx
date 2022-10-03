@@ -11,8 +11,12 @@ import { BallTriangle, ProgressBar } from 'react-loader-spinner'
 import '../styles/DataLoader.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    faLocationDot, faAt, faPhoneVolume
+    faLocationDot, faAt, faPhoneVolume, faArrowRight, faChevronLeft, faStepBackward
 } from "@fortawesome/free-solid-svg-icons";
+import { motion, AnimatePresence } from "framer-motion"
+
+
+
 const ReservationPage = () => {
 
     const daysOfWeek = [
@@ -40,6 +44,7 @@ const ReservationPage = () => {
     const [reservationSending, setReservationSending] = useState(false)
     const [reservationSendingInfo, setReservationSendingInfo] = useState('Wysyłam rezerwację')
     const [reservationSend, setReservationSend] = useState(false)
+    const [activeStep, setActiveStep] = useState(0)
 
 
     const [placeData, setPlaceData] = useState({})
@@ -97,13 +102,19 @@ const ReservationPage = () => {
             dayOfWeek: activeDate.dayOfWeek
         }).then(resolve => {
             if (resolve.data.success) {
+                setReservationSending(false)
                 setReservationSend(true)
             }
         })
     }
 
     const guestData = () => {
-        return (<>
+        return (<motion.div
+            initial={{ opacity: 0, rotateX: 90 }}
+            animate={{ opacity: 1, rotateX: 0 }}
+            exit={{ opacity: 0, rotateX: 90 }}
+            transition={{ duration: .5 }}
+            className="guest-data-wrapper">
             <span><span className="number">4</span>Podaj swoje dane:</span>
             <form onSubmit={submitHandle} className="guest-data">
                 <div>
@@ -122,7 +133,7 @@ const ReservationPage = () => {
                 </div>
 
             </form>
-        </>)
+        </motion.div>)
     }
 
     const formatTimeComponent = (number) => {
@@ -137,9 +148,12 @@ const ReservationPage = () => {
         termsToResetClass.forEach(day => day.classList.remove('active'))
         e.currentTarget.className += " active"
         setActiveTerm({ start: e.currentTarget.dataset.termstart, end: e.currentTarget.dataset.termend })
+        setActiveStep(3)
     }
 
     const checkFreeTerms = async (activePlace, activeService, date, dayOfWeek) => {
+
+
 
         setTermsLoading(true)
         setActiveTerm('')
@@ -150,6 +164,7 @@ const ReservationPage = () => {
             }
         })
             .then(resolve => {
+
                 if (resolve.data.success) {
                     const terms = resolve.data.freeTerms.map(freeTerm => {
                         return <SplideSlide key={freeTerm.start + freeTerm.end} className="term" data-termstart={freeTerm.start} data-termend={freeTerm.end} data-fullterm={`${formatTimeComponent(parseInt(freeTerm.start / 60))} : ${formatTimeComponent(
@@ -163,6 +178,8 @@ const ReservationPage = () => {
                     setTimeout(() => {
                         setFreeTerms(terms)
                         setTermsLoading(false)
+                        setActiveStep(2)
+
                     }, 500);
                 }
             })
@@ -171,7 +188,12 @@ const ReservationPage = () => {
     const timePicker = () => {
         return (
             <>
-                <div >
+                <motion.div
+                    initial={{ opacity: 0, rotateX: 90 }}
+                    animate={{ opacity: 1, rotateX: 0 }}
+                    exit={{ opacity: 0, rotateX: 90 }}
+                    transition={{ duration: .5 }}
+                    className="time-picker-wrapper">
                     <span><span className="number">3</span>Wybierz czas:</span>
                     <div className="time-picker">
                         {freeTerms.length && activeDate ? <><Splide
@@ -197,7 +219,7 @@ const ReservationPage = () => {
 
                     </div>
 
-                </div>
+                </motion.div>
 
             </>
 
@@ -231,7 +253,13 @@ const ReservationPage = () => {
         }
 
         return (
-            <><span><span className="number">2</span>Wybierz datę:</span>
+            <motion.div
+                initial={{ opacity: 0, rotateX: 90 }}
+                animate={{ opacity: 1, rotateX: 0 }}
+                exit={{ opacity: 0, rotateX: 90 }}
+                transition={{ duration: .5 }}
+                className="date-picker-wrapper">
+                <span><span className="number">2</span>Wybierz datę:</span>
                 <div className="date-picker">
                     <Splide
                         id="days"
@@ -242,6 +270,7 @@ const ReservationPage = () => {
                                 fixedHeight: 100,
                                 drag: true,
                                 pagination: false,
+                                isNavigation: true,
                                 breakpoints: {
                                     1024: {
                                         fixedWidth: 100,
@@ -255,36 +284,45 @@ const ReservationPage = () => {
                     </Splide>
                     {/*  */}
                 </div>
-            </>
+            </motion.div >
         )
     }
 
     const servicePicker = (activePlace) => {
 
-        return (<div className="service-picker">
+        return (<motion.div
+            initial={{ opacity: 0, rotateX: 90 }}
+            animate={{ opacity: 1, rotateX: 0 }}
+            exit={{ opacity: 0, rotateX: 90 }}
+            transition={{ duration: .5 }}
+            className="service-picker">
             <span ><span className="number">1</span> Wybierz usługę:</span>
             <Select
                 placeholder='wybierz usługę...'
                 closeOnSelect
-                clearable
                 options={options}
                 required
+                searchable={false}
+                dropdownPosition='auto'
                 noDataRenderer={() => 'Brak usług...'}
-                onChange={(values) => setActiveService(values[0]?._id)}
+                onChange={(values) => {
+                    setActiveService(values[0]?._id)
+                    setActiveStep(1)
+                }}
                 onClearAll={(values) => setActiveService('')}
                 itemRenderer={({ item, methods }) => (<div onClick={() => methods.addItem(item)} className="option-div">
                     <span className="place-title">{item.name}</span>
                     <div><span className="place-info"> Czas trwania: {item.duration} min.</span><span className="place-info"> Koszt: {item.price}pln</span></div>
                 </div>)}
             />
-        </div>)
+        </motion.div>)
     }
 
     const placeDataRender = () => {
         return (
 
             <div className="place-data">
-                <span>Dokonujesz rezerwacji w:</span>
+                {/* <span>Dokonujesz rezerwacji w:</span> */}
                 <div>
                     <span> <strong>{placeData.name}</strong></span>
                 </div>
@@ -311,8 +349,10 @@ const ReservationPage = () => {
 
     const reservationSendInfo = () => {
 
+        // setActiveStep(0)
+
         return (
-            <div className='data-loader'>
+            <div className='data-loader '>
                 <ProgressBar
                     height="80"
                     width="80"
@@ -338,16 +378,12 @@ const ReservationPage = () => {
 
     }
     const suspendInfo = () => {
-
-
         return (
             <div className='data-loader'>
-
                 <ProgressBar
                     height="80"
                     width="80"
                     ariaLabel="progress-bar-loading"
-
                     wrapperClass="progress-bar-wrapper"
                     borderColor='red'
                     barColor='red'
@@ -364,49 +400,103 @@ const ReservationPage = () => {
                 <button onClick={() => { window.history.go(-1) }}>Wróć do poprzedniej strony</button>
             </div>
         )
+    }
 
+    const backButton = () => {
+
+        return (
+            <>
+                <AnimatePresence>
+                    {(activeStep > 0) &&
+                        <motion.button
+                            initial={{ opacity: 0, rotateX: 90 }}
+                            animate={{ opacity: 1, rotateX: 0 }}
+                            exit={{ opacity: 0, rotateX: 90 }}
+                            transition={{ duration: .5 }}
+                            onClick={() => { setActiveStep(prev => prev - 1) }}
+                            className="back-button">
+                            <FontAwesomeIcon icon={faChevronLeft} />
+                            <span>Poprzedni krok</span>
+                        </motion.button>
+                    }
+                </AnimatePresence>
+            </>
+        )
+    }
+
+
+    const stepNavigation = () => {
+
+        return (
+            <>
+                <div className="step-nav">
+                    <button
+                        onClick={() => { setActiveStep(0) }}
+                        className={`set-step-button ${activeStep === 0 && 'active'} `}><span>1</span> Wybierz usługę</button>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                    <button
+                        onClick={() => { setActiveStep(1) }}
+                        className={`set-step-button ${activeStep === 1 && 'active'} `}
+                        disabled={activeStep < 1} ><span>2</span> Wybierz datę</button>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                    <button
+                        onClick={() => { setActiveStep(2) }}
+                        className={`set-step-button ${activeStep === 2 && 'active'} `}
+                        disabled={activeStep < 2}><span>3</span> Wybierz czas</button>
+                    <FontAwesomeIcon icon={faArrowRight} />
+                    <button
+                        onClick={() => { setActiveStep(3) }}
+                        className={`set-step-button ${activeStep === 3 && 'active'} `}
+                        disabled={activeStep < 3}><span>4</span> Podaj swoje dane</button>
+                </div>
+                <div className="back-button-wrapper">
+
+                    {backButton()}
+                </div>
+            </>
+        )
 
     }
 
     useEffect(() => {
 
-
         const urlParams = new URLSearchParams(window.location.search);
         const place = urlParams.get('place')
         setActivePlace(place)
-        console.log(activePlace);
 
         if (activePlace) {
             fetchPlaceData(activePlace)
             fetchServices(activePlace)
         }
-
         return () => {
             setActiveService('')
             setFreeTerms([])
             setActiveTerm('')
             setOptions([])
             setActiveDate('')
-
-
         }
 
-    }, [activePlace, reservationSend])
+    }, [activePlace])
 
     return (
         <>
+
             <div className="reservation-form">
                 {activePlace && placeDataRender()}
-                {!placeData.suspend && !reservationSend && activePlace && <AutoScrollOnMount scrollTo={'.service-picker'} >{servicePicker(activePlace)}</AutoScrollOnMount>}
+                {stepNavigation()}
                 {!placeData.suspend && !reservationSend && optionsLoading && <DataLoader text={'Wczytuję katalog usług...'} />}
-                {!placeData.suspend && !reservationSend && activeService && <AutoScrollOnMount scrollTo={'.date-picker'}><div> {datePicker()} </div></AutoScrollOnMount>}
-                {!placeData.suspend && !reservationSend && activeDate && (<AutoScrollOnMount scrollTo={'.time-picker'} >{timePicker()}</AutoScrollOnMount>)}
-                {!placeData.suspend && !reservationSend && termsLoading && <DataLoader text={'Wczytuję dostępne terminy...'} />}
-                {(activeDate && activePlace && activeTerm) && <AutoScrollOnMount scrollTo={'.guest-data'}><div>{guestData()}</div></AutoScrollOnMount>}
+
+                {activeStep === 0 && !placeData.suspend && !reservationSend && activePlace && servicePicker(activePlace)}
+
+                {activeStep === 1 && !placeData.suspend && !reservationSend && activeService && <AutoScrollOnMount scrollTo={'.date-picker'}>{datePicker()}</AutoScrollOnMount>}
+                {!placeData.suspend && !reservationSend && termsLoading && <DataLoader text={'Wczytuję dostępne godziny...'} />}
+                {activeStep === 2 && !placeData.suspend && !reservationSend && activeDate && <AutoScrollOnMount scrollTo={'.time-picker'}>{timePicker()}</AutoScrollOnMount>}
+                {activeStep === 3 && (activeDate && activePlace && activeTerm) && <AutoScrollOnMount scrollTo={'.guest-data'}>{guestData()}</AutoScrollOnMount>}
                 {!placeData.suspend && !reservationSend && reservationSending && <DataLoader text={reservationSendingInfo} />}
                 {placeData.suspend && suspendInfo()}
                 {reservationSend && reservationSendInfo()}
-            </div></>
+            </div>
+        </>
     );
 }
 

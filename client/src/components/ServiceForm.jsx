@@ -50,7 +50,7 @@ const ServiceForm = ({ activeService, activePlace, closeForm }) => {
   }, [activeService, activePlace])
 
   return (<>
-    <div onClick={closeForm} className="overlay"></div>
+    {/* <div onClick={closeForm} className="overlay"></div> */}
     <form onSubmit={submitHandle} className="service-form">
       <input
         type="text"
@@ -126,7 +126,8 @@ const ServiceForm = ({ activeService, activePlace, closeForm }) => {
         </label>
       </div>
       <div>
-        <button type="submit">{activeService ? "Zapisz" : "Dodaj"}</button>
+        <button className="green" type="submit">{activeService ? "Zapisz" : "Dodaj"}</button>
+        <button onClick={closeForm}>Anuluj</button>
         <button className="orange" onClick={clearFormHandle}>
           Wyczyść
         </button>

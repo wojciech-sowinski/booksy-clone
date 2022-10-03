@@ -6,6 +6,7 @@ import '../styles/services-page.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle, faStopwatch, faCoins, faPeopleGroup, faPenToSquare, faTrashCan, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { deleteService } from "../actions/userActions";
+import AutoScrollOnMount from '../components/AutoScrollOnMount';
 
 const ServicesPage = ({ activePlace }) => {
 
@@ -57,11 +58,11 @@ const ServicesPage = ({ activePlace }) => {
     <div className="services-page">
 
       <main>
+        {!showServiceForm && <button onClick={() => { setShowServiceForm(true) }}><FontAwesomeIcon icon={faPlus} /><span> Dodaj nową usługę</span></button>}
         {showServiceForm && <ServiceForm activePlace={activePlace} activeService={activeService} closeForm={closeForm} />}
-        <button onClick={() => { setShowServiceForm(true) }}><FontAwesomeIcon icon={faPlus} /><span> Dodaj nową usługę</span></button>
-        <ul className="services-list">
+        {!showServiceForm && <ul className="services-list">
           {renderServices(activePlace, services)}
-        </ul>
+        </ul>}
       </main>
     </div>
   );

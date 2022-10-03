@@ -111,7 +111,7 @@ const ConfigurationPage = () => {
               </NavLink>
               <NavLink to={`./apikeys`}>
                 <FontAwesomeIcon icon={faWrench} />
-                <span> API & Links</span>
+                <span> API/Linki</span>
               </NavLink>
             </nav>
             <div className="configuration-pages-wrapper">

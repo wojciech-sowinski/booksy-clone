@@ -18,24 +18,27 @@ const MainNav = () => {
   const location = useLocation();
 
   return (
-    <ul className={`main-nav ${location.pathname !== '/' ? 'dark' : ''}`}>
-      <Link to="/"><img className="menu-logo-img" src={logomenu} alt="logo" /></Link>
-      <FontAwesomeIcon onClick={() => { setShowMenu(prev => !prev) }} className="burger-icon" icon={faBars} />
-      <div className={showMenu ? 'show' : ''} onClick={() => { setShowMenu(false) }}>
-        <li>
-          <Link to="/">Strona Główna</Link>
-        </li>
-        {auth && (
+    <>
+      {(location.pathname !== '/addreservation') && <ul className={`main-nav ${location.pathname !== '/' ? 'dark' : ''}`}>
+        <Link to="/"><img className="menu-logo-img" src={logomenu} alt="logo" /></Link>
+        <FontAwesomeIcon onClick={() => { setShowMenu(prev => !prev) }} className="burger-icon" icon={faBars} />
+        <div className={showMenu ? 'show' : ''} onClick={() => { setShowMenu(false) }}>
           <li>
-            <Link to="/config">Twoje Miejsca</Link>
+            <Link to="/">Strona Główna</Link>
           </li>
-        )}
-        <li>
-          <LoginButton />
-        </li>
-      </div>
-    </ul>
+          {auth && (
+            <li>
+              <Link to="/config">Twoje Miejsca</Link>
+            </li>
+          )}
+          <li>
+            <LoginButton />
+          </li>
+        </div>
+      </ul>}
+    </>
   );
 };
 
 export default MainNav;
+
