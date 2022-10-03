@@ -13,7 +13,7 @@ The application allows the customer to book an appointment for a given service.
 3. Configure yor place by adding work hours and services catalog. 
 4. The last step is to copy the link to the booking page from the "API / LINKS" tab and place the link on your website (insert the hyperlink in the button or image). 
 
-Thats all, your client be able to set reservation. 
+Thats all, your client be able to set reservation. After reservation done app send email to client and place owner.
 
 ### On the client's booking page, the application checks available dates and times, taking into account other reservations and the working hours entered.
 
