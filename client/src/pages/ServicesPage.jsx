@@ -7,15 +7,29 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle, faStopwatch, faCoins, faPeopleGroup, faPenToSquare, faTrashCan, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { deleteService } from "../actions/userActions";
 import AutoScrollOnMount from '../components/AutoScrollOnMount';
+import DataLoader from "../components/DataLoader";
 
 const ServicesPage = ({ activePlace }) => {
 
   const [showServiceForm, setShowServiceForm] = useState('')
   const [activeService, setActiveService] = useState('')
+  const [dataLoaderText, setDataLoaderText] = useState('')
   const { services, loading } = useSelector(
     (state) => state.servicesReducer
   );
   const dispatch = useDispatch();
+
+  const deleteServiceHandle = (activeService) => {
+    setDataLoaderText('Trwa usuwanie usługi')
+    deleteService(activeService, dispatch)
+      .then(resolve => {
+
+        setDataLoaderText('Usługa usunięta')
+        setTimeout(() => {
+          setDataLoaderText('')
+        }, 2000);
+      })
+  }
 
   const closeForm = () => {
     setShowServiceForm(false)
@@ -46,7 +60,7 @@ const ServicesPage = ({ activePlace }) => {
         </div>
         <div className="service-buttons">
           <button onClick={() => { showForm(service._id) }}><FontAwesomeIcon icon={faPenToSquare} /></button>
-          <button onClick={() => { dispatch(deleteService(service._id)) }}><FontAwesomeIcon icon={faTrashCan} /></button>
+          <button onClick={() => { deleteServiceHandle(service._id) }}><FontAwesomeIcon icon={faTrashCan} /></button>
         </div>
       </li>)
     })
@@ -56,10 +70,10 @@ const ServicesPage = ({ activePlace }) => {
 
   return (
     <div className="services-page">
-
+      {dataLoaderText && <DataLoader text={dataLoaderText} />}
       <main>
         {!showServiceForm && <button onClick={() => { setShowServiceForm(true) }}><FontAwesomeIcon icon={faPlus} /><span> Dodaj nową usługę</span></button>}
-        {showServiceForm && <ServiceForm activePlace={activePlace} activeService={activeService} closeForm={closeForm} />}
+        {showServiceForm && <ServiceForm activePlace={activePlace} activeService={activeService} closeForm={closeForm} setDataLoaderText={setDataLoaderText} />}
         {!showServiceForm && <ul className="services-list">
           {renderServices(activePlace, services)}
         </ul>}

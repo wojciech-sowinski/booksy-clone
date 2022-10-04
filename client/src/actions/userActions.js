@@ -226,9 +226,9 @@ export const deleteTimeFrame = (id) => async (dispatch) => {
     });
 };
 
-export const addService = (activePlace, formData, dispatch) => {
+export const addService = async (activePlace, formData, dispatch) => {
   
-  return axios
+  return await axios
     .post(
       config.serverUrl + "services",
       { ...formData },
@@ -240,6 +240,7 @@ export const addService = (activePlace, formData, dispatch) => {
     )
     .then((resolve) => {
       fetchServices(dispatch)
+      return resolve
     });
 };
 
@@ -257,7 +258,7 @@ export const updateService = (formData, dispatch) => {
     )
     .then((resolve) => {
       fetchServices(dispatch)
-      return resolve.data
+      return resolve
       
     });
 };
@@ -281,8 +282,8 @@ dispatch({type:"fetchServices",payload:{loading:true}})
     });
 };
 
-export const deleteService = (id) => async (dispatch) => {
-  await axios
+export const deleteService = async (id,dispatch) => {
+  return await axios
     .delete(config.serverUrl + "services", {
       headers: { "x-access-token": localStorage.getItem(config.authTokenName) },
       data: {
@@ -291,6 +292,7 @@ export const deleteService = (id) => async (dispatch) => {
     })
     .then((resolve) => {
       fetchServices(dispatch)
+      return resolve
     });
 };
 

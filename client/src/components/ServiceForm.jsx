@@ -5,27 +5,52 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addService, updateService, deleteService } from "../actions/userActions";
 import { useEffect } from "react";
+import DataLoader from "../components/DataLoader";
 
-const ServiceForm = ({ activeService, activePlace, closeForm }) => {
+const ServiceForm = ({ activeService, activePlace, closeForm, setDataLoaderText }) => {
   const [formData, setFormData] = useState({});
+
   const dispatch = useDispatch();
   const { response, loading, services } = useSelector(
     (state) => state.servicesReducer
   );
-  const [addServiceInfo, setAddServiceInfo] = useState(response);
+
 
   const submitHandle = (e) => {
     e.preventDefault();
     if (activeService) {
+      setDataLoaderText('Trwa edycja usługi')
       updateService({ ...formData }, dispatch)
+        .then(resolve => {
+          setDataLoaderText('Usługa zmieniona')
+          setTimeout(() => {
+            setDataLoaderText('')
+          }, 2000);
+        })
     } else {
-
+      setDataLoaderText('Trwa dodawanie usługi')
       addService(activePlace, { ...formData, placeId: activePlace }, dispatch)
+        .then(resolve => {
+          setDataLoaderText('Usługa dodana')
+          setTimeout(() => {
+            setDataLoaderText('')
+          }, 2000);
+        })
     }
     closeForm()
   };
 
+  const deleteServiceHandle = (activeService) => {
+    setDataLoaderText('Trwa usuwanie usługi')
+    deleteService(activeService, dispatch)
+      .then(resolve => {
 
+        setDataLoaderText('Usługa usunięta')
+        setTimeout(() => {
+          setDataLoaderText('')
+        }, 2000);
+      })
+  }
   const clearFormHandle = () => {
     setFormData({});
   };
@@ -51,6 +76,7 @@ const ServiceForm = ({ activeService, activePlace, closeForm }) => {
 
   return (<>
     {/* <div onClick={closeForm} className="overlay"></div> */}
+
     <form onSubmit={submitHandle} className="service-form">
       <input
         type="text"
@@ -132,7 +158,7 @@ const ServiceForm = ({ activeService, activePlace, closeForm }) => {
           Wyczyść
         </button>
         {activeService && (
-          <button onClick={() => { dispatch(deleteService(activeService)) }} className="red">
+          <button onClick={() => { deleteServiceHandle(activeService) }} className="red">
             Usuń
           </button>
         )}
