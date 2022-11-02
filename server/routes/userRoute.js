@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const path = require("path");
-const config = require("../config");
+// const config = require("../config");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Place = require("../models/place");
@@ -11,7 +11,6 @@ const { verifyJWT } = require("../middleware/verifyJWT");
 
 router.post("/register", (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
 
   if(password.length<5){
     res.status(200).json({ success: false, response: "password to short" });
@@ -35,10 +34,10 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
-  const { secret, tokenExp } = config.module;
+  // const { secret, tokenExp } = config.module;
 
-  const secretPhrase = secret || process.env.SECRET_PHRASE
-  const tokenExpiry = tokenExp || process.env.TOKEN_EXPIRY
+  const secretPhrase = process.env.SECRET_PHRASE
+  const tokenExpiry =  process.env.TOKEN_EXPIRY
 
   const sanitizeEmail = email.toLowerCase();
 

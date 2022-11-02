@@ -4,11 +4,11 @@ const jwt = require("jsonwebtoken");
 const path = require("path");
 const mongoose = require("mongoose");
 const app = express();
-const config = require("./config");
-const { mongoDbUrl, secret, serverPort } = config.module;
+// const config = require("./config");
+// const { mongoDbUrl, secret, serverPort } = config.module;
 
-const listenPort = serverPort || process.env.SERVER_PORT
-const dbUrl = mongoDbUrl || process.env.DB_URL
+const listenPort =  process.env.SERVER_PORT
+const dbUrl =  process.env.DB_URL
 
 
 //middleware

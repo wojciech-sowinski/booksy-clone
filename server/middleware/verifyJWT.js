@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
-const config = require("../config");
+// const config = require("../config");
 
 const verifyJWT = (req, res, next) => {
-  const { secret } = config.module;
+  // const { secret } = config.module;
 
-  const secretPhrase = secret || process.env.SECRET_PHRASE
+  const secretPhrase = process.env.SECRET_PHRASE
 
   const token = req.headers["x-access-token"];
 

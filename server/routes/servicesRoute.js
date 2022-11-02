@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const path = require("path");
-const config = require("../config");
+// const config = require("../config");
 const jwt = require("jsonwebtoken");
 
 const Service = require("../models/service");
