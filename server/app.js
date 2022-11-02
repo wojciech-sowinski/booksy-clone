@@ -14,10 +14,10 @@ const dbUrl =  process.env.DB_URL
 //middleware
 
 const corsOption = {
-  origin: 'http://bookin.owliedev.pl/',
+  origin: 'http://bookin.owliedev.pl',
   credentials: true,
 }
-app.use(cors(corsOption));
+app.use(cors());
 
 
 
@@ -41,8 +41,8 @@ app.get("/", (req, res) => {
   res.send("server is listening");
 });
 
-app.use("/", cors(corsOption), userRoute);
-app.use("/", cors(corsOption), placesRoute);
-app.use("/", cors(corsOption), timeFramesRoute);
-app.use("/", cors(corsOption), servicesRoute);
-app.use("/", cors(corsOption), termsRoute);
+app.use("/", cors(), userRoute);
+app.use("/", cors(), placesRoute);
+app.use("/", cors(), timeFramesRoute);
+app.use("/", cors(), servicesRoute);
+app.use("/", cors(), termsRoute);
