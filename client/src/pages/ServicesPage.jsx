@@ -45,7 +45,19 @@ const ServicesPage = ({ activePlace }) => {
 
     const filteredServices = services?.filter(service => service.placeId === activePlace)
 
-    return filteredServices?.map(service => {
+    const sortedServices = filteredServices.sort((a, b) => {
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+
+    return sortedServices?.map(service => {
 
       return (<li key={service._id} className={`service ${(service.suspend ? 'suspend' : '')}`}>
         <div>

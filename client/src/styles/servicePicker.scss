@@ -12,14 +12,14 @@
     display: flex;
     justify-content: center;
     height: 50px;
-    button {
-      display: flex;
-      align-items: center;
-      column-gap: 10px;
-      background-color: #3dbda5;
-      transform-origin: top;
-      border-radius: 0 0 2;
-    }
+  }
+  .back-button {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    background-color: #3dbda5;
+    transform-origin: top;
+    border-radius: 0 0 2;
   }
 
   .service-picker,
@@ -48,7 +48,6 @@
     button {
       height: 50px;
       background-color: transparent;
-      color: #4b81d3;
       font-size: 1rem;
       display: flex;
       align-items: center;
@@ -104,11 +103,18 @@
       color: #3dbda6;
     }
   }
-
-  > div > span,
   .term-info {
     font-size: 1.5rem;
     color: #4b81d3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 15px;
+  }
+  > div > span {
+    font-size: 1.5rem;
+    color: #4b81d3;
+
     .number {
       display: inline-block;
       margin: 10px;

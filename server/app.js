@@ -7,15 +7,27 @@ const app = express();
 const config = require("./config");
 const { mongoDbUrl, secret, serverPort } = config.module;
 
+const listenPort = serverPort || process.env.SERVER_PORT
+const dbUrl = mongoDbUrl || process.env.DB_URL
+
+
 //middleware
-app.use(cors());
+
+const corsOption = {
+  origin: 'http://bookin.owliedev.pl/',
+  credentials: true,
+}
+app.use(cors(corsOption));
+
+
+
 app.use(express.json());
 
-app.listen(serverPort);
+app.listen(listenPort);
 
-console.log("server start on port " + serverPort);
+console.log("server start on port " + listenPort);
 
-mongoose.connect(mongoDbUrl);
+mongoose.connect(dbUrl);
 
 //routes
 const router = express.Router();
@@ -29,8 +41,8 @@ app.get("/", (req, res) => {
   res.send("server is listening");
 });
 
-app.use("/", cors(), userRoute);
-app.use("/", cors(), placesRoute);
-app.use("/", cors(), timeFramesRoute);
-app.use("/", cors(), servicesRoute);
-app.use("/", cors(), termsRoute);
+app.use("/", cors(corsOption), userRoute);
+app.use("/", cors(corsOption), placesRoute);
+app.use("/", cors(corsOption), timeFramesRoute);
+app.use("/", cors(corsOption), servicesRoute);
+app.use("/", cors(corsOption), termsRoute);

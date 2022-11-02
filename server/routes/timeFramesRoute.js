@@ -34,11 +34,9 @@ router.post("/frames", verifyJWT, (req, res) => {
     (err, data) => {
       
       if (err) {
-        console.log("search failed", err);
         res.json({ success: false, result: "search failed" });
       } else {
         if (data.length) {
-          console.log(data.length, "collides");
           res.json({
             success: false,
             result: "collides",

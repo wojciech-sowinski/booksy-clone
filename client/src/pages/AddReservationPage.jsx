@@ -78,7 +78,17 @@ const ReservationPage = () => {
                         return {
                             ...service, label: `${service.name}`, value: service._id
                         }
-                    })
+                    }).sort((a, b) => {
+                        const nameA = a.label.toUpperCase();
+                        const nameB = b.label.toUpperCase();
+                        if (nameA < nameB) {
+                            return -1;
+                        }
+                        if (nameA > nameB) {
+                            return 1;
+                        }
+                        return 0;
+                    });
                     setTimeout(() => {
                         setOptions(fetchedServices)
                         setOptionsLoading(false)
@@ -215,7 +225,7 @@ const ReservationPage = () => {
                             }
                         >
                             {freeTerms}
-                        </Splide></> : <div><span className="term-info">Brak wolnych terminów w wybranym dniu</span></div>}
+                        </Splide></> : <div className="term-info"><span >Brak wolnych terminów w wybranym dniu</span><div>{backButton('Wróć do wyboru daty')}</div></div>}
 
                     </div>
 
@@ -402,7 +412,7 @@ const ReservationPage = () => {
         )
     }
 
-    const backButton = () => {
+    const backButton = (text = 'Poprzedni krok') => {
 
         return (
             <>
@@ -416,7 +426,7 @@ const ReservationPage = () => {
                             onClick={() => { setActiveStep(prev => prev - 1) }}
                             className="back-button">
                             <FontAwesomeIcon icon={faChevronLeft} />
-                            <span>Poprzedni krok</span>
+                            <span>{text}</span>
                         </motion.button>
                     }
                 </AnimatePresence>

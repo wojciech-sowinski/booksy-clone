@@ -83,7 +83,7 @@ const ReservationsPage = ({ activePlace }) => {
 
             return {
               ...reservation,
-              title: reservation.serviceInfo[0].name,
+              title: reservation.serviceInfo[0]?.name ?? 'Usługa skasowana',
               start: eventStart,
             }
           })

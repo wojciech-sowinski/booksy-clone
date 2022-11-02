@@ -36,7 +36,10 @@ router.post("/register", (req, res) => {
 router.post("/login", (req, res) => {
   const { email, password } = req.body;
   const { secret, tokenExp } = config.module;
-  console.log(req.body);
+
+  const secretPhrase = secret || process.env.SECRET_PHRASE
+  const tokenExpiry = tokenExp || process.env.TOKEN_EXPIRY
+
   const sanitizeEmail = email.toLowerCase();
 
   User.findOne(
@@ -48,8 +51,8 @@ router.post("/login", (req, res) => {
       }
       if (data) {
         const userId = data.id;
-        const token = jwt.sign({ userId }, secret, {
-          expiresIn: tokenExp,
+        const token = jwt.sign({ userId }, secretPhrase, {
+          expiresIn: tokenExpiry,
         });
         res.json({ success: true, response: "user log in", authToken: token });
       } else {
