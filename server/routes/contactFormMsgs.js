@@ -6,6 +6,7 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Place = require("../models/place");
+const nodemailer = require('nodemailer');
 
 const transport = nodemailer.createTransport({
     host: process.env.NODE_APP_SMTP_HOST,
