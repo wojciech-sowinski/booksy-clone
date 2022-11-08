@@ -6,6 +6,7 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Place = require("../models/place");
+
 const ObjectId = require('mongodb').ObjectID
 
 const { verifyJWT } = require("../middleware/verifyJWT");
