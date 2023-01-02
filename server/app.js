@@ -15,7 +15,7 @@ const dbUrl =  process.env.DB_URL
 
 //middleware
 
-const whitelist = ['http://bookin.owliedev.pl', 'http://owliedev.pl']
+const whitelist = ['http://bookin.owliedev.pl', 'http://owliedev.pl','http://localhost']
 
 const corsOption = {
   origin: function (origin, callback) {

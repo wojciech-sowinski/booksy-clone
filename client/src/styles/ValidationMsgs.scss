@@ -1,0 +1,14 @@
+.srv-validation-message {
+  margin-top: -25px;
+  color: rgb(243, 36, 0) !important;
+  font-weight: 500 !important;
+  font-size: 0.8rem !important;
+}
+
+.not-valid {
+  border: 2px solid red !important;
+
+  &::placeholder {
+    color: red;
+  }
+}

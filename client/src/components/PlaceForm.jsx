@@ -1,9 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import '../styles/ValidationMsgs.scss'
 import "../styles/place-form.scss";
 import { addPlace, updatePlace, deletePlace } from "../actions/userActions";
 import DataLoader from "./DataLoader";
+import SimpleReactValidator from 'simple-react-validator'
 
 const PlaceForm = ({ activePlace, setActivePlace }) => {
   const [formData, setFormData] = useState({});
@@ -11,6 +13,18 @@ const PlaceForm = ({ activePlace, setActivePlace }) => {
   const { loading, places } = useSelector((state) => state.placesReducer);
   const [showLoader, setShowLoader] = useState(false)
   const [loaderText, setLoaderText] = useState('')
+
+
+  const simpleReactValidator = useRef(new SimpleReactValidator(
+    {
+
+      messages: {
+        email: 'Nieprawidłowy adres email',
+        required: 'Pole wymagane'
+      },
+
+    }
+  ))
 
   const formFieldChangeHandle = (e) => {
     let propertyValue;
@@ -46,29 +60,33 @@ const PlaceForm = ({ activePlace, setActivePlace }) => {
 
   const submitHandle = (e) => {
     e.preventDefault();
-    setShowLoader(true)
-    if (!activePlace) {
-      setLoaderText('Trwa dodawanie nowego miejsca')
-      addPlace(formData, dispatch)
-        .then(resolve => {
-          setLoaderText('Miejsce dodane')
-          setTimeout(() => {
-            setShowLoader(false)
-            setLoaderText('')
-          }, 2000);
-        })
+    if (simpleReactValidator.current.allValid()) {
+      setShowLoader(true)
+      if (!activePlace) {
+        setLoaderText('Trwa dodawanie nowego miejsca')
+        addPlace(formData, dispatch)
+          .then(resolve => {
+            setLoaderText('Miejsce dodane')
+            setTimeout(() => {
+              setShowLoader(false)
+              setLoaderText('')
+            }, 2000);
+          })
+      } else {
+        setLoaderText('Trwa zmiana danych')
+        updatePlace(formData, dispatch)
+          .then(resolve => {
+            setLoaderText('Dane miejsca zostały zmienione')
+            setTimeout(() => {
+              setShowLoader(false)
+              setLoaderText('')
+            }, 2000);
+          })
+      }
     } else {
-      setLoaderText('Trwa zmiana danych')
-      updatePlace(formData, dispatch)
-        .then(resolve => {
-          setLoaderText('Dane miejsca zostały zmienione')
-          setTimeout(() => {
-            setShowLoader(false)
-            setLoaderText('')
-          }, 2000);
-        })
+      simpleReactValidator.current.showMessages()
+      console.log('check');
     }
-    console.log('end');
   };
 
   useEffect(() => {
@@ -94,8 +112,10 @@ const PlaceForm = ({ activePlace, setActivePlace }) => {
           name="name"
           onChange={formFieldChangeHandle}
           value={formData.name || ""}
-          required
+          // required
+          className={simpleReactValidator.current.message('name', formData.name, 'required') && 'not-valid'}
         />
+
         <div>
           <input
             style={{ width: "50%" }}
@@ -158,14 +178,24 @@ const PlaceForm = ({ activePlace, setActivePlace }) => {
             onChange={formFieldChangeHandle}
             value={formData.phone || ""}
           />
-          <input
-            style={{ width: "50%" }}
-            type="email"
-            placeholder="Email"
-            name="email"
-            onChange={formFieldChangeHandle}
-            value={formData.email || ""}
-          />
+          <div>
+
+            <input
+              style={{ width: "50%" }}
+              className={simpleReactValidator.current.message('email', formData.email, 'required') && 'not-valid'}
+              type="email"
+              placeholder="Email"
+              name="email"
+              onChange={formFieldChangeHandle}
+              value={formData.email || ""}
+              onFocus={() => simpleReactValidator.current.showMessageFor('email')}
+
+            />
+            <div>
+
+            </div>
+          </div>
+
         </div>
         <div>
           <input
@@ -195,6 +225,9 @@ const PlaceForm = ({ activePlace, setActivePlace }) => {
             Czy wstrzymać możliwość rezerwacji?
           </label>
         </div>
+
+        {!simpleReactValidator.current.allValid() && <div><span className="srv-validation-message">* uzupełnij wymagane pola</span></div>}
+
         <div>
           <button type="submit">{activePlace ? "Zapisz" : "Dodaj"}</button>
           <button className="orange" onClick={clearFormHandle}>

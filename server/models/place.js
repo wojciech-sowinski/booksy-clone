@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
   city: { type: String },
   postalCode: { type: String },
   country: { type: String },
-  email: { type: String },
+  email: { type: String ,required: true,},
   emailSend: { type: Boolean, default: false },
   phone: { type: String },
   created: {

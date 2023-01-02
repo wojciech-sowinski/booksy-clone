@@ -1,11 +1,13 @@
 import "../styles/service-form.scss";
+import '../styles/ValidationMsgs.scss'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addService, updateService, deleteService } from "../actions/userActions";
 import { useEffect } from "react";
 import DataLoader from "../components/DataLoader";
+import SimpleReactValidator from 'simple-react-validator'
 
 const ServiceForm = ({ activeService, activePlace, closeForm, setDataLoaderText }) => {
   const [formData, setFormData] = useState({});
@@ -14,30 +16,45 @@ const ServiceForm = ({ activeService, activePlace, closeForm, setDataLoaderText 
   const { response, loading, services } = useSelector(
     (state) => state.servicesReducer
   );
+  const simpleReactValidator = useRef(new SimpleReactValidator(
+    {
+
+      messages: {
+        required: 'Pole wymagane'
+      },
+
+    }
+  ))
 
 
   const submitHandle = (e) => {
     e.preventDefault();
-    if (activeService) {
-      setDataLoaderText('Trwa edycja usługi')
-      updateService({ ...formData }, dispatch)
-        .then(resolve => {
-          setDataLoaderText('Usługa zmieniona')
-          setTimeout(() => {
-            setDataLoaderText('')
-          }, 2000);
-        })
-    } else {
-      setDataLoaderText('Trwa dodawanie usługi')
-      addService(activePlace, { ...formData, placeId: activePlace }, dispatch)
-        .then(resolve => {
-          setDataLoaderText('Usługa dodana')
-          setTimeout(() => {
-            setDataLoaderText('')
-          }, 2000);
-        })
+
+    if (simpleReactValidator.current.allValid()) {
+      if (activeService) {
+        setDataLoaderText('Trwa edycja usługi')
+        updateService({ ...formData }, dispatch)
+          .then(resolve => {
+            setDataLoaderText('Usługa zmieniona')
+            setTimeout(() => {
+              setDataLoaderText('')
+            }, 2000);
+          })
+      } else {
+        setDataLoaderText('Trwa dodawanie usługi')
+        addService(activePlace, { ...formData, placeId: activePlace }, dispatch)
+          .then(resolve => {
+            setDataLoaderText('Usługa dodana')
+            setTimeout(() => {
+              setDataLoaderText('')
+            }, 2000);
+          })
+      }
+      closeForm()
+
     }
-    closeForm()
+
+
   };
 
   const deleteServiceHandle = (activeService) => {
@@ -85,6 +102,8 @@ const ServiceForm = ({ activeService, activePlace, closeForm, setDataLoaderText 
         name="name"
         value={formData.name || ""}
         required
+        onFocus={() => simpleReactValidator.current.showMessageFor('name')}
+        className={simpleReactValidator.current.message('name', formData.name, 'required') && 'not-valid'}
       />
       <textarea
         placeholder="Krótki opis usługi, max 200 znaków"
@@ -103,6 +122,8 @@ const ServiceForm = ({ activeService, activePlace, closeForm, setDataLoaderText 
           onChange={formFieldChangeHandle}
           value={formData.duration || ""}
           required
+          onFocus={() => simpleReactValidator.current.showMessageFor('duration')}
+          className={simpleReactValidator.current.message('duration', formData.duration, 'required') && 'not-valid'}
         />
         <span style={{ width: "10%" }}> minut</span>
       </div>
@@ -113,6 +134,9 @@ const ServiceForm = ({ activeService, activePlace, closeForm, setDataLoaderText 
           style={{ width: "90%" }}
           name="price"
           onChange={formFieldChangeHandle}
+          required
+          onFocus={() => simpleReactValidator.current.showMessageFor('price')}
+          className={simpleReactValidator.current.message('price', formData.price, 'required') && 'not-valid'}
           value={formData.price || ""}
         />
         <span style={{ width: "10%" }}>PLN</span>
@@ -126,6 +150,8 @@ const ServiceForm = ({ activeService, activePlace, closeForm, setDataLoaderText 
           onChange={formFieldChangeHandle}
           value={formData.quanity || ""}
           required
+          onFocus={() => simpleReactValidator.current.showMessageFor('quanity')}
+          className={simpleReactValidator.current.message('quanity', formData.quanity, 'required') && 'not-valid'}
         />
         <span style={{ width: "10%" }}>szt.</span>
       </div>
@@ -151,6 +177,7 @@ const ServiceForm = ({ activeService, activePlace, closeForm, setDataLoaderText 
           możliwe, już dokonane rezerwacje pozostają jako aktywne).
         </label>
       </div>
+      {!simpleReactValidator.current.allValid() && <div><span className="srv-validation-message">* uzupełnij wymagane pola</span></div>}
       <div>
         <button className="green" type="submit">{activeService ? "Zapisz" : "Dodaj"}</button>
         <button onClick={closeForm}>Anuluj</button>
