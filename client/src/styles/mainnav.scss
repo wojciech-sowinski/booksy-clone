@@ -17,6 +17,11 @@
     fill: #fff;
   }
   &.dark {
+    background-image: linear-gradient(
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0)
+    );
     a {
       color: #0a2e64;
     }
@@ -48,11 +53,20 @@
     font-size: 1.5rem;
   }
 
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 1100px) {
     height: 60px;
     justify-content: space-between;
     align-items: center;
     padding: 0px 30px;
+
+    &.dark {
+      background-image: linear-gradient(
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 1),
+        rgba(255, 255, 255, 1)
+      );
+    }
+
     .burger-icon {
       display: block;
       color: #000;
@@ -84,7 +98,7 @@
     }
   }
 
-  @media screen and (max-width: 1023px) {
+  @media screen and (max-width: 1100px) {
     img {
       max-height: 30px;
     }

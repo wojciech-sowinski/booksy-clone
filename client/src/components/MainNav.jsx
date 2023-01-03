@@ -26,6 +26,9 @@ const MainNav = () => {
           <li>
             <Link to="/">Strona Główna</Link>
           </li>
+          <li>
+            <Link to="/howto">Jak korzystać</Link>
+          </li>
           {auth && (
             <li>
               <Link to="/config">Twoje Miejsca</Link>

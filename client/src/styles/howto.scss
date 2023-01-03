@@ -1,0 +1,373 @@
+.how-to-page {
+  main {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow-y: auto;
+    .how-to-info {
+      width: 100%;
+      min-height: 70vh;
+      position: absolute;
+      padding: 10px 0 0 0;
+      top: 100px;
+      display: flex;
+      flex-direction: column;
+
+      // row-gap: 100px;
+      h1 {
+        font-weight: 600;
+        font-size: 3rem;
+      }
+      .how-to-card {
+        display: flex;
+        padding: 50px;
+        justify-content: space-around;
+        align-items: center;
+        column-gap: 50px;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          align-items: baseline;
+          row-gap: 30px;
+          a {
+            background-color: #09977d;
+            position: relative;
+            overflow: hidden;
+            padding: 20px 50px;
+            color: #fff;
+            text-decoration: none;
+            width: 100%;
+            text-align: center;
+            &::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 10px;
+              height: 100%;
+              background-color: rgba(255, 255, 255, 0.7);
+              backdrop-filter: in;
+              animation: slide 10s linear infinite;
+              filter: blur(5px);
+            }
+          }
+          img {
+            width: 500px;
+            margin: auto;
+            border: 2px solid #0a2e64;
+          }
+          p {
+            font-size: 2.5rem;
+            text-align: left;
+          }
+
+          strong {
+            font-size: 5rem;
+            font-weight: 800;
+          }
+        }
+        &:last-child {
+          min-height: 70vh;
+        }
+      }
+    }
+    .home-page-banner-vid {
+      video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .home-page-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      animation: blurIn 12s;
+    }
+    .register-button {
+      margin: auto;
+    }
+    .step-nav {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      column-gap: 90px;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      transition: 1s;
+      margin: auto;
+      padding: 30px 0 30px 0;
+
+      // background-color: #3dbda623;
+      &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-bottom: 2px dotted #3dbda5;
+        transform: translateY(-50%);
+        z-index: 1;
+      }
+
+      button {
+        height: 50px;
+        background-color: transparent;
+        font-size: 2rem;
+        display: flex;
+        align-items: center;
+        color: #09977d;
+        padding: 0;
+        z-index: 2;
+
+        span {
+          display: inline-block;
+          width: 30px;
+          height: 30px;
+          font-weight: 400;
+          border-radius: 30px;
+          font-size: 1rem;
+          // margin: 0 5px;
+          line-height: 30px;
+          background-color: #3dbda5;
+          color: #fff;
+          transition: 0.5s;
+        }
+        &.active {
+          transition: 0.5s;
+          color: #4b81d3;
+          span {
+            transition: 0.5s;
+            background-color: #4b81d3;
+            color: #fff;
+          }
+        }
+        &:disabled {
+          opacity: 0.4;
+          transition: 0.5s;
+        }
+      }
+    }
+  }
+}
+
+@keyframes blurIn {
+  0% {
+    backdrop-filter: blur(12px);
+  }
+
+  100% {
+    backdrop-filter: blur(12px);
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .how-to-page {
+    main {
+      .step-nav {
+        button {
+          font-size: 2rem;
+        }
+      }
+      .how-to-info {
+        padding: 50px;
+        .how-to-card {
+          display: flex;
+          column-gap: 50px;
+          div {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            justify-content: center;
+            row-gap: 30px;
+            a {
+            }
+            img {
+              width: 400px;
+            }
+            p {
+              font-size: 1.7rem;
+            }
+
+            strong {
+              font-size: 3.5rem;
+              font-weight: 800;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .how-to-page {
+    main {
+      .how-to-info {
+        padding: 50px;
+        .how-to-card {
+          display: flex;
+          column-gap: 40px;
+          div {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            justify-content: center;
+            row-gap: 30px;
+            a {
+            }
+            img {
+              width: 400px;
+            }
+            p {
+              font-size: 1.4rem;
+            }
+
+            strong {
+              font-size: 3rem;
+              font-weight: 800;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 1024px) {
+  .how-to-page {
+    main {
+      .step-nav {
+        button {
+          font-size: 1.5rem;
+        }
+      }
+      .how-to-info {
+        padding: 30px;
+        .how-to-card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          row-gap: 60px;
+          column-gap: 40px;
+          min-height: 50vh;
+          div {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            justify-content: center;
+            row-gap: 30px;
+            width: 100%;
+            a {
+            }
+            img {
+              width: 500px;
+            }
+            p {
+              font-size: 1.4rem;
+            }
+
+            strong {
+              font-size: 3rem;
+              font-weight: 800;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .how-to-page {
+    main {
+      .step-nav {
+        column-gap: 70px;
+        button {
+          font-size: 1rem;
+        }
+      }
+      .how-to-info {
+        padding: 10px;
+
+        .how-to-card {
+          display: flex;
+          flex-direction: column;
+          align-items: baseline;
+          row-gap: 60px;
+          column-gap: 40px;
+          min-height: 50vh;
+
+          div {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            justify-content: center;
+            row-gap: 30px;
+            a {
+            }
+            img {
+              width: 350px;
+            }
+            p {
+              font-size: 1.3rem;
+            }
+
+            strong {
+              font-size: 2.5rem;
+              font-weight: 800;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 480px) {
+  .how-to-page {
+    main {
+      .step-nav {
+        column-gap: 20px;
+      }
+      .how-to-info {
+        padding: 10px;
+        .how-to-card {
+          display: flex;
+          flex-direction: column;
+          align-items: baseline;
+          row-gap: 60px;
+          column-gap: 40px;
+          min-height: 50vh;
+          div {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            justify-content: center;
+            row-gap: 20px;
+            a {
+            }
+            img {
+              width: 100%;
+            }
+            p {
+              font-size: 1rem;
+            }
+
+            strong {
+              font-size: 1.7rem;
+              font-weight: 800;
+            }
+          }
+        }
+      }
+    }
+  }
+}

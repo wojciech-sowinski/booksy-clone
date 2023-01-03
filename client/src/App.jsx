@@ -20,6 +20,7 @@ import config from "./config";
 import HomePage from "./pages/HomePage";
 import MainNav from "./components/MainNav";
 import ReservationPage from "./pages/AddReservationPage";
+import HowToPage from "./pages/HowToPage";
 
 function App() {
   const { info, loading, userData, auth } = useSelector(
@@ -48,6 +49,10 @@ function App() {
             <Route
               path="/addreservation"
               element={<ReservationPage />}
+            />
+            <Route
+              path="/howto"
+              element={<HowToPage />}
             />
             <Route path="*" element={<HomePage />} />
           </Routes>
