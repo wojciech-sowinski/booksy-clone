@@ -1,0 +1,1 @@
+BookIn — klon rezerwacji (React/Redux + Node/Express/MongoDB). Demo: bookin.owliedev.pl. Projekt portfolio, nie produkcja.
